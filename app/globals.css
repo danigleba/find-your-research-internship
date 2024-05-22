@@ -12,11 +12,19 @@
   }
 
   .button-secondary {
-    @apply border border-[#30313D] text-[#30313D] font-medium;
+    @apply border border-[#dee1e7] bg-[#f9f9f9] text-[#30313D] font-medium;
+  }
+
+  .profile {
+    @apply w-10 aspect-square bg-[#30313D] rounded-full; 
   }
 
   .flex-box {
     @apply flex items-center justify-center;
+  }
+
+  .bg-image {
+    @apply bg-cover bg-center;
   }
 
   .no-ring {
