@@ -12,7 +12,11 @@
   }
 
   .button-secondary {
-    @apply border border-[#dee1e7] bg-[#f9f9f9] text-[#30313D] font-medium;
+    @apply border border-[#dee1e7] bg-[#f9f9f9] text-[#30313D] font-medium hover:bg-[#dee1e7] transition;
+  }
+
+  .button-tertiary {
+    @apply border border-[#4040e6] text-[#4040e6] font-medium;
   }
 
   .profile {
@@ -21,6 +25,10 @@
 
   .flex-box {
     @apply flex items-center justify-center;
+  }
+
+  .transition {
+    @apply ease-in-out duration-200;
   }
 
   .bg-image {

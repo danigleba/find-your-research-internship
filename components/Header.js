@@ -8,7 +8,7 @@ export default function Header() {
         <p className={`${rubik.className} text-[#30313D] text-2xl font-bold`}>Portiko</p>
         <div className="flex-box gap-6">
             <button className="button-secondary">Login</button>
-            <button className="button-primary">Create a profile</button>
+            <button className="button-primary">Post a collaboration</button>
         </div>
       </main>
     )

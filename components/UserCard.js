@@ -1,7 +1,7 @@
 export default function UserCard() {
     return (
-        <main className="flex-box flex-col w-full items-start space-y-6 p-2 rounded-xl pb-6 bg-[#f9f9f9]  border-[#dee1e7]">
-            <div className="bg-cover bg-[url('/example.jpg')] w-full aspect-video rounded-lg"></div>
+        <main className="flex-box flex-col w-full items-start space-y-6 p-2 rounded-xl pb-6 bg-[#f9f9f9]">
+            <div className="bg-cover bg-[url('/example.jpg')] w-full aspect-video rounded-lg cursor-pointer"></div>
             <div className="px-6 space-y-6">
                 <div className="space-y-6">
                     <div className="space-y-3">
@@ -14,9 +14,9 @@ export default function UserCard() {
                             </div>
                         </div>
                     </div>
-                    <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de tex... <a className="underline">Read more</a></p>
+                    <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de tex... <a className="underline cursor-pointer">Read more</a></p>
                 </div>             
-                <button className="button-primary w-full">Contact</button>   
+                <button className="button-tertiary hover:button-primary w-full transition">Collaborate</button>   
             </div>
         </main>
     )
