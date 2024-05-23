@@ -4,7 +4,11 @@
 
 @layer base {
   button {
-    @apply py-2 px-6 rounded-lg;
+    @apply py-2 px-6 rounded-lg text-sm md:text-base;
+  }
+
+  h2 {
+    @apply font-bold text-base md:text-xl; 
   }
 
   .button-primary {
@@ -12,7 +16,7 @@
   }
 
   .button-secondary {
-    @apply border border-[#dee1e7] bg-[#f9f9f9] text-[#30313D] font-medium hover:bg-[#dee1e7] transition;
+    @apply border border-[#30313D] text-[#30313D] font-medium hover:bg-[#30313D] hover:text-white transition;
   }
 
   .button-tertiary {

@@ -1,4 +1,6 @@
-export default function UserCard() {
+import { FaHandsClapping } from "react-icons/fa6"
+
+export default function PostCard() {
     return (
         <main className="flex-box flex-col w-full items-start space-y-6 p-2 rounded-xl pb-6 bg-[#f9f9f9]">
             <div className="bg-cover bg-[url('/example.jpg')] w-full aspect-video rounded-lg cursor-pointer"></div>
@@ -16,7 +18,7 @@ export default function UserCard() {
                     </div>
                     <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de tex... <a className="underline cursor-pointer">Read more</a></p>
                 </div>             
-                <button className="button-tertiary hover:button-primary w-full transition">Collaborate</button>   
+                <button className="flex-box gap-3 button-primary w-full hover:scale-105 transition"><FaHandsClapping />Collaborate</button>   
             </div>
         </main>
     )
