@@ -60,7 +60,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
           {posts?.map((item, index) => (
-            <PostCard key={index} title={item.title} description={item.description} image={item.image} author_id={item.author} />
+            <PostCard user={user} key={index} title={item.title} description={item.description} image={item.image} author_id={item.author} />
           ))}
         </div>
       </div>

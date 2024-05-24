@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
+import AuthModal from "./AuthModal"
 import { FaHandsClapping } from "react-icons/fa6"
 
-export default function PostCard({ title, description, image, author_id }) {
+export default function PostCard({ user, title, description, image, author_id }) {
     const [author, setAuthor] = useState({})
     const [showFullDescription, setShowFullDescription] = useState(false)
 
@@ -21,6 +22,26 @@ export default function PostCard({ title, description, image, author_id }) {
         }
     }
 
+    const sendCollabEmail = async (e) => {
+        e.prevent.default
+        try {
+            const response = await fetch("/api/emails/sendCollabEmail", {
+              method: "GET",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+            })
+            const data = await response.json()
+            console.log(email)
+        } catch (error) {
+            console.error("Error fetching data:", error)
+        }
+    }
+
+    const openLoginModal = async () => {
+        document.getElementById("authModal").showModal()
+    }
+    
     useEffect(() => {
         if (author_id) getPostAuthor()
     }, [author_id])
@@ -42,7 +63,7 @@ export default function PostCard({ title, description, image, author_id }) {
                     <p>{showFullDescription ? description : `${description.slice(0, 100)}...`}</p>
                     <a className="link" onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
                 </div>   
-                <button onClick={()=>document.getElementById("collabModal").showModal()} className="button-primary flex-box gap-3 w-full"><FaHandsClapping />Collaborate</button>   
+                <button onClick={()=> user != undefined ? document.getElementById("collabModal").showModal() : openLoginModal()} className="button-primary flex-box gap-3 w-full"><FaHandsClapping />Collaborate</button>   
             </div>
             <dialog id="collabModal" className="modal">
                 <div className="modal-box space-y-6">
@@ -60,16 +81,22 @@ export default function PostCard({ title, description, image, author_id }) {
                         <form method="dialog" className="flex-box flex-col items-end w-full space-y-6" >
                             <div className="form-section">
                                 <label>Message <a className="font-light">(Optional)</a></label>
-                                <textarea className="textarea textarea-bordered w-full focus:outline-none focus:ring-0" placeholder="Bio"></textarea>
+                                <textarea className="textarea textarea-bordered w-full focus:outline-none focus:ring-0" placeholder={`Hi ${author?.name}, I would love to collaborate!`}></textarea>
                             </div>        
                             <div className="flex-box justify-between w-full gap-12">
-                                <button className="button-secondary w-full">Close</button>
-                                <button className="button-primary w-full">Send</button>
+                                <button onClick={(e) => sendCollabEmail(e)} className="button-primary w-full">Send</button>
                             </div>
+                        </form>
+                        <form method="dialog">
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
                         </form>
                     </div>
                 </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
             </dialog>
+            <AuthModal />
         </main>
     )
 }
