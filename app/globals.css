@@ -11,8 +11,12 @@
     @apply font-bold text-base md:text-xl; 
   }
 
+  label {
+    @apply text-sm font-medium;
+  }
+
   .button-primary {
-    @apply bg-[#4040e6] border border-[#4040e6] text-white font-medium;
+    @apply bg-[#4040e6] border border-[#4040e6] text-white font-medium active:scale-95 transition;
   }
 
   .button-secondary {
@@ -23,8 +27,16 @@
     @apply border border-[#4040e6] text-[#4040e6] font-medium;
   }
 
+  .link {
+    @apply text-[#4040e6] font-medium cursor-pointer no-underline;
+  }
+
+  .error {
+    @apply text-red-400 text-sm font-light; 
+  }
+
   .profile {
-    @apply w-10 aspect-square bg-[#30313D] rounded-full; 
+    @apply flex-box w-10 aspect-square bg-[#30313D] text-white font-semibold bg-cover bg-center rounded-full; 
   }
 
   .flex-box {
@@ -35,8 +47,12 @@
     @apply ease-in-out duration-200;
   }
 
+  .form-section {
+    @apply w-full space-y-1;
+  }
+
   .bg-image {
-    @apply bg-cover bg-center;
+    @apply bg-cover bg-center bg-[#30313D];
   }
 
   .no-ring {

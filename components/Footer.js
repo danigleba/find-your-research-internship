@@ -20,10 +20,10 @@ export default function Footer() {
                         <p className="font-semibold text-lg pb-2">Social</p>
                         <div className="space-y-1">
                             <div>
-                                <a href="https://twitter.com/danigleba" target="_blank" className="hover:underline px-12 md:px-0">X</a>
+                                <a href="https://x.com/Ana_BurgosRuiz/status/1793670564093260103" target="_blank" className="hover:underline px-12 md:px-0">X</a>
                             </div> 
                             <div>
-                                <a href="https://www.linkedin.com/in/danigleba/" target="_blank" className="hover:underline px-12 md:px-0">LinkedIn</a>
+                                <a href="https://joinportiko.com" target="_blank" className="hover:underline px-12 md:px-0">Site</a>
                             </div>
                         </div>
                     </div>
