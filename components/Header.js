@@ -2,6 +2,7 @@ import { useState } from "react"
 import Cookies from "js-cookie"
 import { Rubik } from "next/font/google"
 import AuthModal from "./AuthModal"
+import NewPostModal from "./NewPostModal"
 import { IoLogOut } from "react-icons/io5"
 
 const rubik = Rubik({ subsets: ["latin"] })
@@ -32,9 +33,9 @@ export default function Header({ user }) {
           <button onClick={() => openSignupModal()} className="button-tertiary hover:bg-[#4040e6] hover:text-white transition">Sign Up</button>
         </div>
       )}
-      {user != undefined && (
+      {user && user != undefined && (
         <div className="flex-box gap-6 justify-start">
-          <button className="button-primary">+ New collab</button>
+          <button onClick={() => document.getElementById("newPostModal").showModal()} className="button-primary">New Collaboration</button>
           <div className="flex-box gap-3">
             <p className="hidden md:block font-semibold text-base">{user?.name}</p>
             <div className="profile hidden md:flex" style={{ backgroundImage: `url(${user?.profile_picture})` }}>{!user?.profile_picture ? user?.name?.[0] : "" }</div>
@@ -42,7 +43,8 @@ export default function Header({ user }) {
           </div>
         </div>
       )}
-      <AuthModal />
+      <AuthModal baseAuthOption={authOption}/>
+      <NewPostModal user={user} />
     </main>
   )
 }

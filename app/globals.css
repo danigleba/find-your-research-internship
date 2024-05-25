@@ -51,6 +51,10 @@
     @apply w-full space-y-1;
   }
 
+  .tag {
+    @apply bg-white rounded px-3 py-1 w-max text-sm font-semibold;
+  }
+
   .bg-image {
     @apply bg-cover bg-center bg-[#30313D];
   }
