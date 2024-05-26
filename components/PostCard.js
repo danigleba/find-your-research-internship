@@ -18,7 +18,7 @@ export default function PostCard({ user, item }) {
               headers: {
                   "Content-Type": "application/json",
               },
-              body: JSON.stringify({ author_id: item?.author })
+              body: JSON.stringify({ author_email: item?.author })
             })
             const data = await response.json()
             setAuthor(data.data[0])
