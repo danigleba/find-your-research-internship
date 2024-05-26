@@ -58,7 +58,7 @@ export default function PostCard({ user, item }) {
     }
 
     const closePostModal = async () => {
-        const closeButton = document.getElementById("closePostModal")
+        const closeButton = document.getElementById(`closePostModal-${item.title}-${author.name}`)
         closeButton.click()
     }
     
@@ -135,7 +135,7 @@ export default function PostCard({ user, item }) {
                     </div>
                 </div>
                 <form method="dialog" className="modal-backdrop">
-                    <button id="closePostModal">close</button>
+                    <button id={`closePostModal-${item.title}-${author.name}`}>close</button>
                 </form>
             </dialog>
             <AuthModal />
