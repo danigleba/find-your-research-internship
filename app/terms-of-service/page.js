@@ -81,7 +81,7 @@ export default function PrivacyPolicy() {
                                 </div>
                                 <div className="pb-4">
                                     <h2>Contact Information:</h2>
-                                    <p>Email: dani@portiko.com <br/><br/>For any questions or concerns regarding these Terms of Service, please contact us at the provided email address. <br/><br/> Thank you for using Portiko!</p>
+                                    <p>Email: <a className="underline" href="mailto:dani@joinportiko.com">dani@joinportiko.com</a> <br/><br/>For any questions or concerns regarding these Terms of Service, please contact us at the provided email address. <br/><br/> Thank you for using Portiko!</p>
                                     <p className="legal-text pt-6">Last updated: 31.12.2023</p>
                                 </div>
                                 <button onClick={() => router.push("/")} className="flex-box gap-3 px-0">

@@ -33,7 +33,7 @@ export default function Header({ user }) {
           <button onClick={() => openSignupModal()} className="button-tertiary hover:bg-[#4040e6] hover:text-white transition">Sign Up</button>
         </div>
       )}
-      {user && user != undefined && (
+      {user?.name && user != undefined && (
         <div className="flex-box gap-6 justify-start">
           <button onClick={() => document.getElementById("newPostModal").showModal()} className="button-primary">New Collaboration</button>
           <div className="flex-box gap-3">

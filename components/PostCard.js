@@ -86,7 +86,9 @@ export default function PostCard({ user, item }) {
                         <div className="flex-box justify-start gap-3">
                             <div className="profile" style={{ backgroundImage: `url(${author?.profile_picture})` }}>{!author?.profile_picture ? author?.name?.[0] : "" }</div>
                             <div className="flex-box flex-col items-start">
-                                <p className="font-medium text-md opacity-100 cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
+                                <div className="tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
+                                    <p className="font-medium text-md cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
+                                </div>
                                 <p className="font-light text-sm">{author?.position} at {author?.institution}</p>
                             </div>
                         </div>
@@ -100,12 +102,18 @@ export default function PostCard({ user, item }) {
                 <div className="modal-box space-y-6">
                     <div className="space-y-3">
                         <div className="flex-box gap-3 justify-start">
-                            <div className="profile w-8 text-xs blur-sm" style={{ backgroundImage: `url(${author?.profile_picture})` }}>{!author?.profile_picture ? author?.name?.[0] : "" }</div>
-                            <p className="font-medium text-base blur-sm">{author?.name}</p>
+                            <div className="profile w-10 text-xs" style={{ backgroundImage: `url(${author?.profile_picture})` }}>{!author?.profile_picture ? author?.name?.[0] : "" }</div>
+                            <div>
+                                <div className="tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
+                                    <p className="font-medium text-base font-medium cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
+                                </div>
+                                <p className="font-light">{author?.position} at {author?.institution}</p>
+                            </div>
                         </div>
                         <div>
                             <p className="font-bold text-2xl">{item?.title} collaboration</p>
-                            <p>The researcher will get an email with your message and your contact information so you can start working together asap.</p>
+                            <p>Note: The researcher will get your message and contact information.</p>
+                            <p>So you can start collaborating as soon as possible.</p>
                         </div>
                     </div>
                     <div className="modal-action">

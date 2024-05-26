@@ -20,7 +20,7 @@ export default function Footer() {
                         <p className="font-semibold text-lg pb-2">Contact</p>
                         <div className="space-y-1">
                             <div>
-                                <a href="https://x.com/Ana_BurgosRuiz/status/1793670564093260103" target="_blank" className="hover:underline px-12 md:px-0">dani@joinportiko.com</a>
+                                <a href="mailto:dani@joinportiko.com" target="_blank" className="hover:underline px-12 md:px-0">dani@joinportiko.com</a>
                             </div> 
                         </div>
                     </div>
