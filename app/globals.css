@@ -50,7 +50,7 @@
   .form-section {
     @apply w-full space-y-1;
   }
-
+  
   .tag {
     @apply bg-white rounded px-3 py-1 w-max text-sm font-semibold;
   }
