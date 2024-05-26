@@ -88,9 +88,10 @@ export default function PostCard({ user, item }) {
                         <div className="flex-box justify-start gap-3">
                             <div className="profile" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div className="flex-box flex-col items-start">
-                                <div className="tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
+                                <div className="hidden md:flex tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
                                     <p className="font-medium text-md cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
                                 </div>
+                                <p className="font-medium text-md cursor-default md:hidden" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
                                 <p className="font-light text-sm">{author?.position} at {author?.institution}</p>
                             </div>
                         </div>
@@ -106,9 +107,10 @@ export default function PostCard({ user, item }) {
                         <div className="flex-box gap-3 justify-start">
                             <div className="profile w-10 text-xs" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div>
-                                <div className="tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
+                                <div className="hidden md:flex w-max tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
                                     <p className="font-medium text-base font-medium cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
                                 </div>
+                                <p className="font-medium text-base font-medium cursor-default md:hidden" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
                                 <p className="font-light">{author?.position} at {author?.institution}</p>
                             </div>
                         </div>

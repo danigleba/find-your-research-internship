@@ -58,7 +58,7 @@ export default function NewPostModal({ user }) {
     }
     } catch (error) {
       console.error("Error fetching data:", error)
-      setErrors(prevState => ({ ...prevState, apiError: "An unexpected error occurred. Try using a different email." }))
+      setErrors(prevState => ({ ...prevState, apiError: "An unexpected error occurred. Please try again." }))
       setLoading(false)
     }  
   }
