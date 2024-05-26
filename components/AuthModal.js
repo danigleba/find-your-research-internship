@@ -158,6 +158,7 @@ export default function AuthModal({ baseAuthOption }) {
                 <div className="flex-box flex-col items-center space-y-3 w-full">
                   <button type="submit" onClick={(e) => checkForm(e, signupData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full " ></span> : "Sign up"}</button>
                   {errors.apiError && <p className="error">{errors.apiError}</p>}
+                  <p className="text-xs text-center">By signing up, you agree to our <a href="/privacy-policy" className="underline">privacy policy</a> and <a href="/terms-of-service" className="underline">terms of service</a>.</p>
                   <p>Already have an account? <a onClick={() => openLoginModal()} className="link">Log in</a></p>
                 </div>
               </form>
@@ -184,7 +185,7 @@ export default function AuthModal({ baseAuthOption }) {
                 <div className="flex-box flex-col items-center space-y-3 w-full">
                   <button type="submit" onClick={(e) => checkForm(e, loginData)} className="button-primary w-full">{loading ? <span className="flex-box h-full loading loading-spinner pb-0 loading-xs flex-box h-full "></span> : "Log in"}</button>
                   {errors.apiError && <p className="error">{errors.apiError}</p>}
-                  <p>Don"t have an account yet? <a onClick={() => openSignupModal()} className="link">Sign up</a></p>
+                  <p>Don't have an account yet? <a onClick={() => openSignupModal()} className="link">Sign up</a></p>
                 </div>
               </form>
               <form method="dialog">

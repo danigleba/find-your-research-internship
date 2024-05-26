@@ -45,7 +45,7 @@ export default function PrivacyPolicy() {
                                 <p className="font-bold text-2xl md:text-3xl">Terms of Service</p>
                                 <div>
                                     <h2>Overview</h2>
-                                    <p>Thank you for using Portiko ("we," "us," or "our"), a Software as a Service (SaaS) platform available at getPortiko.com. By accessing or using our services, you agree to comply with and be bound by these Terms of Service.</p>
+                                    <p>Thank you for using Portiko ("we," "us," or "our"), a Software as a Service (SaaS) platform available at joinportiko.com. By accessing or using our services, you agree to comply with and be bound by these Terms of Service.</p>
                                 </div>
                                 <div>
                                     <h2>User Agreement</h2>
@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
                                 </div>
                                 <div >
                                     <h2>SaaS Subscription</h2>
-                                    <p>Portiko offers SaaS subscriptions, accessible through getPortiko.com. Payments for subscriptions are processed through Stripe. By subscribing, you agree to Stripe"s terms and conditions.</p>
+                                    <p>Portiko offers SaaS subscriptions, accessible through joinportiko.com. Payments for subscriptions are processed through Stripe. By subscribing, you agree to Stripe"s terms and conditions.</p>
                                 </div>
                                 <div>
                                     <h2>Payment and Billing</h2>
@@ -65,7 +65,7 @@ export default function PrivacyPolicy() {
                                 </div>
                                 <div >
                                     <h2>Privacy Policy</h2>
-                                    <p>Your use of Portiko is also governed by our Privacy Policy. Please review the policy at <a href="getPortiko.com/pp" className="underline">getPortiko.com/pp</a>.</p>
+                                    <p>Your use of Portiko is also governed by our Privacy Policy. Please review the policy at <a href="joinportiko.com/pp" className="underline">joinportiko.com/pp</a>.</p>
                                 </div>
                                 <div >
                                     <h2>Intellectual Property</h2>

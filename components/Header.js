@@ -38,7 +38,7 @@ export default function Header({ user }) {
           <button onClick={() => document.getElementById("newPostModal").showModal()} className="button-primary">New Collaboration</button>
           <div className="flex-box gap-3">
             <p className="hidden md:block font-semibold text-base">{user?.name}</p>
-            <div className="profile hidden md:flex" style={{ backgroundImage: `url(${user?.profile_picture})` }}>{!user?.profile_picture ? user?.name?.[0] : "" }</div>
+            <div className="profile hidden md:flex" style={{ backgroundImage: `url(${user?.profile_picture ? user?.profile_picture : "/profile.png"})` }}></div>
             <IoLogOut className="cursor-pointer" onClick={() => logout()} size={30} />
           </div>
         </div>

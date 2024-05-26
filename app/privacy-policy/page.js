@@ -45,7 +45,7 @@ export default function PrivacyPolicy() {
                                 <p className="font-bold text-2xl md:text-3xl">Privacy policy</p>
                                 <div>
                                     <h2 className="legal-title">Overview</h2>
-                                    <p>Thank you for using Portiko ("we," "us," or "our"), a Software as a Service (SaaS) platform available at getPortiko.com. This Privacy Policy outlines how we collect, use, and safeguard your information.
+                                    <p>Thank you for using Portiko ("we," "us," or "our"), a Software as a Service (SaaS) platform available at joinportiko.com. This Privacy Policy outlines how we collect, use, and safeguard your information.
                                     </p>
                                 </div>
                                 <div>

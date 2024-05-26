@@ -84,13 +84,13 @@ export default function Home() {
     filterPostsByCategory()
   }, [category])
   return (
-    <main className="mt-6 md:mt-12 text-[#30313D]">
+    <main className="mt-6 md:mt-12 text-[#30313D] overflow-hidden">
       <div className="mx-6 md:mx-24 space-y-12 pb-12">
         <Header user={user} />
         <div className="space-y-6">
           {/*Search Bar*/}
           <div className="flex-box flex-col justify-center w-full space-y-3"> 
-            <h2>Which technique, analysis, or experiment would you like to collaborate on?</h2>
+            <h2>I need collaborators with expertise in</h2>
             <div className="flex-box gap-6 w-full md:w-2/3 border border-[#dee1e7] shadow-sm rounded-full px-6 placeholder:text-[#30313D] w-2/3">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#dee1e7" className="size-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />

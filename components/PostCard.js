@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { use, useEffect, useState } from "react"
 import AuthModal from "./AuthModal"
 import Toast from "./Toast"
 import { FaHandsClapping } from "react-icons/fa6"
@@ -42,6 +42,7 @@ export default function PostCard({ user, item }) {
             const data = await response.json()
             if (data) {
                 closePostModal()
+                setLoading(false)
                 showSuccessToast()
                 setComment("")
             }
@@ -76,7 +77,8 @@ export default function PostCard({ user, item }) {
     }, [item?.author])
     return (
         <main className="flex-box flex-col w-full items-start space-y-6 p-2 rounded-xl pb-6 bg-[#f9f9f9]">
-            <div className="flex-box items-end justify-end bg-cover w-full aspect-video rounded-lg cursor-pointer p-3" style={{ backgroundImage: `url(${item?.image ? item?.image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6H-wpoicibd_-GAWDXZUQGzX2kF3YeCwbJwikwdaq2Q&s"})` }}>
+            <div className="flex-box items-end justify-between bg-cover w-full aspect-video rounded-lg cursor-pointer p-3 bg-gradient-to-r from-violet-600 to-indigo-600">
+                <div className="tag bg-[#30313D] text-white">{author?.institution}</div>
                 <div className="tag">{item?.categories?.[0]}</div>
             </div>
             <div className="flex-box flex-col justify-between items-start w-full h-2/3 px-6 space-y-6">
@@ -84,7 +86,7 @@ export default function PostCard({ user, item }) {
                     <div className="space-y-3">
                         <p className="font-extrabold text-2xl">{item?.title}</p>
                         <div className="flex-box justify-start gap-3">
-                            <div className="profile" style={{ backgroundImage: `url(${author?.profile_picture})` }}>{!author?.profile_picture ? author?.name?.[0] : "" }</div>
+                            <div className="profile" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div className="flex-box flex-col items-start">
                                 <div className="tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
                                     <p className="font-medium text-md cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
@@ -93,16 +95,16 @@ export default function PostCard({ user, item }) {
                             </div>
                         </div>
                     </div>
-                    <p>{showFullDescription ? item?.description : `${item?.description.slice(0, 100)}...`}</p>
-                    <a className="link" onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
+                    <p>{showFullDescription ? item?.description : `${item?.description.slice(0, 100)}${item?.description?.length > 100 ? "..." : ""}`}</p>
+                    <a className={`${item?.description?.length <= 100 ? "hidden" : "link"}`} onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
                 </div>   
-                <button onClick={()=> user != undefined ? document.getElementById("collabModal").showModal() : openLoginModal()} className="button-primary flex-box gap-3 w-full"><FaHandsClapping />Collaborate</button>   
+                <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary flex-box gap-3 w-full"><FaHandsClapping />Collaborate</button>   
             </div>
-            <dialog id="collabModal" className="modal">
+            <dialog id={`collabModal-${item.title}-${author.name}`} className="modal">
                 <div className="modal-box space-y-6">
                     <div className="space-y-3">
                         <div className="flex-box gap-3 justify-start">
-                            <div className="profile w-10 text-xs" style={{ backgroundImage: `url(${author?.profile_picture})` }}>{!author?.profile_picture ? author?.name?.[0] : "" }</div>
+                            <div className="profile w-10 text-xs" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div>
                                 <div className="tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
                                     <p className="font-medium text-base font-medium cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
@@ -110,10 +112,9 @@ export default function PostCard({ user, item }) {
                                 <p className="font-light">{author?.position} at {author?.institution}</p>
                             </div>
                         </div>
-                        <div>
+                        <div className="space-y-3">
                             <p className="font-bold text-2xl">{item?.title} collaboration</p>
-                            <p>Note: The researcher will get your message and contact information.</p>
-                            <p>So you can start collaborating as soon as possible.</p>
+                            <p><b>Note:</b> The researcher will get your contact information (name, e-mail, position and institution).</p>
                         </div>
                     </div>
                     <div className="modal-action">

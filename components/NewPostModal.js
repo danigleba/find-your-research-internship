@@ -48,12 +48,13 @@ export default function NewPostModal({ user }) {
     const data = await response.json()
     if (data) {
       closeNewPostModal()
+      setPostData({title: "", description: "", category: "STEP"})
       showSuccessToast()
       setLoading(false)
     }
     else {
         setLoading(false)
-        setErrors(prevState => ({ ...prevState, apiError: "An unexpected error occurred. Try using a different email." }))
+        setErrors(prevState => ({ ...prevState, apiError: "An unexpected error occurred. Please try again." }))
     }
     } catch (error) {
       console.error("Error fetching data:", error)
@@ -85,17 +86,17 @@ export default function NewPostModal({ user }) {
               <p className="font-extrabold text-2xl text-center">Post a new collaboration</p>
               <div className="w-full space-y-3">
                 <div className="form-section">
-                  <label htmlFor="Title">Title</label>
-                  <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Experimtne example" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                  <label htmlFor="Title">Name of the analysis, experiment or technique</label>
+                  <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Identification and characterization of microorganism " className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
                   {errors.title && <p className="error">{errors.title}</p>}
                 </div>
                 <div className="form-section">
                   <label htmlFor="Description">Description</label>
-                  <textarea value={postData?.description} onChange={(e) => handleChange(e, postData)} type="text" id="description" name="description" className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder={`Hi, I would love to collaborate!`}></textarea>
+                  <textarea value={postData?.description} onChange={(e) => handleChange(e, postData)} type="text" id="description" name="description" rows={3} className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder="Experiment the identification and characterization of microorganism using techniques like..."></textarea>
                   {errors.description && <p className="error">{errors.description}</p>}
                 </div>      
                 <div className="form-section">
-                  <label htmlFor="categories">Category</label>
+                  <label htmlFor="categories">Area</label>
                   <div className="w-full border border-gray-300 px-3 rounded-lg" >
                     <select value={postData?.categories} onChange={(e) => handleChange(e, postData)} id="categories" name="categories" className="w-full h-12 focus:outline-none focus:ring-0">
                       {categories.map((item, index) => (
