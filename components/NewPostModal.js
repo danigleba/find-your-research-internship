@@ -98,7 +98,7 @@ export default function NewPostModal({ user }) {
                 <div className="form-section">
                   <label htmlFor="categories">Area</label>
                   <div className="w-full border border-gray-300 rounded-lg px-3 overflow-hidden" >
-                    <select value={postData?.categories} onChange={(e) => handleChange(e, postData)} id="categories" name="categories" className="w-full h-12 focus:outline-none focus:ring-0">
+                    <select value={postData?.categories} onChange={(e) => handleChange(e, postData)} id="categories" name="categories" className="w-full h-12 focus:outline-none focus:ring-0 ">
                       {categories.map((item, index) => (
                         <option key={index} value={item}>{item}</option>
                       ))}

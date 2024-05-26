@@ -7,8 +7,16 @@
     @apply py-2 px-6 rounded-lg text-sm md:text-base;
   }
 
+  h1 {
+    @apply font-bold text-base text-3xl md:text-4xl; 
+  }
+
   h2 {
     @apply font-bold text-base md:text-xl; 
+  }
+
+  .subtitle {
+    @apply w-full md:w-1/2 text-sm md:text-base;
   }
 
   label {
@@ -52,7 +60,7 @@
   }
   
   .tag {
-    @apply bg-white rounded px-3 py-1 w-max text-sm font-semibold;
+    @apply bg-white border border-[#dee1e7] rounded px-3 py-1 w-max text-sm font-semibold;
   }
 
   .bg-image {

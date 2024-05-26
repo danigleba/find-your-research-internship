@@ -4,6 +4,7 @@ import Cookies from "js-cookie"
 import Header from "@/components/Header"
 import PostCard from "@/components/PostCard"
 import Footer from "@/components/Footer"
+import Hero from "@/components/Hero"
 
 export default function Home() {
   const categories = ["STEM", "Humanities", "Social Sciences", "Health",  "Arts"]
@@ -88,6 +89,9 @@ export default function Home() {
       <div className="mx-6 md:mx-24 space-y-12 pb-12">
         <Header user={user} />
         <div className="space-y-6">
+          {user == undefined && (
+            <Hero />
+          )}
           {/*Search Bar*/}
           <div className="flex-box flex-col justify-center w-full space-y-3"> 
             <h2>I need collaborators with expertise in</h2>

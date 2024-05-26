@@ -76,12 +76,12 @@ export default function PostCard({ user, item }) {
         if (item?.author) getPostAuthor()
     }, [item?.author])
     return (
-        <main className="flex-box flex-col w-full items-start space-y-6 p-2 rounded-xl pb-6 bg-[#f9f9f9]">
-            <div className="flex-box items-end justify-between bg-cover w-full aspect-video rounded-lg cursor-pointer p-3 bg-gradient-to-r from-violet-600 to-indigo-600">
+        <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#f9f9f9]">
+            <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer p-0 rom-violet-600 to-indigo-600">
                 <div className="tag bg-[#30313D] text-white">{author?.institution}</div>
                 <div className="tag">{item?.categories?.[0]}</div>
             </div>
-            <div className="flex-box flex-col justify-between items-start w-full h-2/3 px-6 space-y-6">
+            <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
                 <div className="space-y-6">
                     <div className="space-y-3">
                         <p className="font-extrabold text-2xl">{item?.title}</p>
