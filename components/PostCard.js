@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import AuthModal from "./AuthModal"
+import Toast from "./Toast"
 import { FaHandsClapping } from "react-icons/fa6"
 import { IoSend } from "react-icons/io5"
 
@@ -8,7 +9,7 @@ export default function PostCard({ user, item }) {
     const [showFullDescription, setShowFullDescription] = useState(false)
     const [comment, setComment] = useState("")
     const [loading, setLoading] = useState(false)
-    const [emailSent, setEmailSent] = useState(false)
+    const [showToast, setShowToast] = useState(false)
 
     const getPostAuthor = async () => {
         try {
@@ -29,6 +30,7 @@ export default function PostCard({ user, item }) {
     const sendCollabEmail = async (e) => {
         e.preventDefault()
         setLoading(true)
+
         try {
             const response = await fetch("/api/emails/sendCollabEmail", {
               method: "POST",
@@ -39,7 +41,9 @@ export default function PostCard({ user, item }) {
             })
             const data = await response.json()
             if (data) {
-                setEmailSent(true)
+                closePostModal()
+                showSuccessToast()
+                setComment("")
             }
             setLoading(false)
         } catch (error) {
@@ -51,7 +55,22 @@ export default function PostCard({ user, item }) {
     const openLoginModal = async () => {
         document.getElementById("authModal").showModal()
     }
+
+    const closePostModal = async () => {
+        const closeButton = document.getElementById("closePostModal")
+        closeButton.click()
+    }
     
+    const showSuccessToast = async () => {
+        setShowToast(true)
+        
+        const timeout = setTimeout(() => {
+          setShowToast(false)
+        }, 5000)
+        
+        return () => clearTimeout(timeout)
+    }
+
     useEffect(() => {
         if (item?.author) getPostAuthor()
     }, [item?.author])
@@ -96,7 +115,7 @@ export default function PostCard({ user, item }) {
                                 <textarea value={comment} onChange={(e) => setComment(e.target.value)} type="text" id="comment" name="comment" className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder={`Hi, I would love to collaborate!`}></textarea>
                             </div>        
                             <div className="flex-box justify-between w-full gap-12">
-                                <button onClick={(e) => sendCollabEmail(e)} className={`${emailSent == true ? "bg-[#30313D] border border-[#30313D] text-white" : ""} flex-box gap-3 button-primary w-full`}>{emailSent == true ? "Message Sent" : loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Ask for a collaboration"}<IoSend className={`${loading || emailSent ? "hidden" : ""}`} /></button>
+                                <button onClick={(e) => sendCollabEmail(e)} className="flex-box gap-3 button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Ask for a collaboration"}<IoSend className={`${loading ? "hidden" : ""}`} /></button>
                             </div>
                         </form>
                         <form method="dialog">
@@ -105,10 +124,13 @@ export default function PostCard({ user, item }) {
                     </div>
                 </div>
                 <form method="dialog" className="modal-backdrop">
-                    <button>close</button>
+                    <button id="closePostModal">close</button>
                 </form>
             </dialog>
             <AuthModal />
+            {showToast == true && (
+                <Toast text="Collaboration request sent!" />
+            )}
         </main>
     )
 }

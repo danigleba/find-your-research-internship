@@ -13,7 +13,6 @@ export default function Home() {
   const [search, setSearch] = useState("")
   const [category, setCategory] = useState("")
 
-
   const getUserData = async () => {
     try {
       const response = await fetch("/api/db/getUserData", {
@@ -86,7 +85,7 @@ export default function Home() {
   }, [category])
   return (
     <main className="mt-6 md:mt-12 text-[#30313D]">
-      <div className="mx-6 md:mx-24 space-y-12">
+      <div className="mx-6 md:mx-24 space-y-12 pb-12">
         <Header user={user} />
         <div className="space-y-6">
           {/*Search Bar*/}
