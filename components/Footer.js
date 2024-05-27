@@ -13,6 +13,7 @@ export default function Footer() {
                     </div>
                     <p className="text-sm pt-3 text-center md:text-left">Find scientific collaborations in minutes</p>
                     <p className="text-sm text-center md:text-left">Portiko © 2024 All rights reserved</p>
+                    <p className="text-sm pt-3 text-center md:text-left text-xs">To delete your profile or posts,<br/> please email at dani@joinportiko.com.</p>
                 </div>
                 <div className="md:flex md:justify-end items-start space-y-12 md:space-y-0 gap-24 text-lg md:text-sm">
                     {/*Contact*/}
