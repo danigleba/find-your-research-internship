@@ -17,6 +17,7 @@ export default function Home() {
   const [search, setSearch] = useState("")
   const [category, setCategory] = useState("")
   const page = searchParams.get("page") || 0
+  const [isSearchResult, setIsSearchResult] = useState(false)
 
   const getUserData = async () => {
     try {
@@ -69,8 +70,14 @@ export default function Home() {
 
   const searchCollaborations = async (e) => {  
     e.preventDefault()
-    if (search) getSearchedPosts()
-    if (search == "") getPosts()
+    if (search) {
+      getSearchedPosts()
+      setIsSearchResult(true)
+    }
+    if (search == "") {
+      getPosts()
+      setIsSearchResult(false)
+    }
   }
 
   useEffect(() => {
@@ -134,7 +141,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <Pagination page={page} user={user}/>
+        {isSearchResult == false && (
+          <Pagination page={page} user={user}/>
+        )}
         <Footer />
       </main>
     </Suspense>
