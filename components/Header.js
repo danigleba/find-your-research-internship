@@ -27,13 +27,13 @@ export default function Header({ user }) {
   return (
     <main className="flex items-center justify-between w-full">
       <p className={`${rubik.className} text-[#30313D] text-xl md:text-2xl font-bold`}>Portiko</p>
-      {user == undefined && (
+      {!Cookies.get("portiko-id") && (
         <div className="flex-box gap-6">
           <button onClick={() => openLoginModal()} className="button-secondary">Login</button>
           <button onClick={() => openSignupModal()} className="button-tertiary hover:bg-[#4040e6] hover:text-white transition">Sign Up</button>
         </div>
       )}
-      {user?.name && user != undefined && (
+      {Cookies.get("portiko-id") && (
         <div className="flex-box gap-6 justify-start">
           <button onClick={() => document.getElementById("newPostModal").showModal()} className="button-primary">New Collaboration</button>
           <div className="flex-box gap-3">

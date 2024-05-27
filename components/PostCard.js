@@ -77,8 +77,8 @@ export default function PostCard({ user, item }) {
     }, [item?.author])
     return (
         <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#f9f9f9]">
-            <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer p-0 rom-violet-600 to-indigo-600">
-                <div className="tag bg-[#30313D] text-white">{author?.institution}</div>
+            <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer gap-6 p-0 rom-violet-600 to-indigo-600">
+                <div className={`${!author?.institution ? "invisible" : ""} tag bg-[#30313D] text-white truncate`}>{author?.institution}</div>
                 <div className="tag">{item?.categories?.[0]}</div>
             </div>
             <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
@@ -96,12 +96,12 @@ export default function PostCard({ user, item }) {
                             </div>
                         </div>
                     </div>
-                    <p>{showFullDescription ? item?.description : `${item?.description.slice(0, 100)}${item?.description?.length > 100 ? "..." : ""}`}</p>
+                    <p>{showFullDescription ? item?.description : `${item?.description?.slice(0, 100)}${item?.description?.length > 100 ? "..." : ""}`}</p>
                     <a className={`${item?.description?.length <= 100 ? "hidden" : "link"}`} onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
                 </div>   
                 <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary flex-box gap-3 w-full"><FaHandsClapping />Collaborate</button>   
             </div>
-            <dialog id={`collabModal-${item.title}-${author.name}`} className="modal">
+            <dialog id={`collabModal-${item.title}-${author?.name}`} className="modal">
                 <div className="modal-box space-y-6">
                     <div className="space-y-3">
                         <div className="flex-box gap-3 justify-start">
@@ -135,7 +135,7 @@ export default function PostCard({ user, item }) {
                     </div>
                 </div>
                 <form method="dialog" className="modal-backdrop">
-                    <button id={`closePostModal-${item.title}-${author.name}`}>close</button>
+                    <button id={`closePostModal-${item.title}-${author?.name}`}>close</button>
                 </form>
             </dialog>
             <AuthModal />

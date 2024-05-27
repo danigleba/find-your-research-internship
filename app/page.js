@@ -89,7 +89,7 @@ export default function Home() {
       <div className="mx-6 md:mx-24 space-y-12 pb-12">
         <Header user={user} />
         <div className="space-y-6">
-          {user == undefined && (
+          {!Cookies.get("portiko-id") && (
             <Hero />
           )}
           {/*Search Bar*/}
