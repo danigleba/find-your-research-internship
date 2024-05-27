@@ -79,25 +79,25 @@ export default function PostCard({ user, item }) {
         <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#f9f9f9]">
             <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer gap-6 p-0 rom-violet-600 to-indigo-600">
                 <div className={`${!author?.institution ? "invisible" : ""} tag bg-[#30313D] text-white truncate`}>{author?.institution}</div>
-                <div className="tag">{item?.categories?.[0]}</div>
+                <div className="tag whitespace-nowrap">{item?.categories?.[0]}</div>
             </div>
             <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
                 <div className="space-y-6">
                     <div className="space-y-3">
                         <p className="font-extrabold text-2xl">{item?.title}</p>
                         <div className="flex-box justify-start gap-3">
-                            <div className="profile" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
-                            <div className="flex-box flex-col items-start">
-                                <div className="hidden md:flex tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
+                            <div className="profile w-12" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
+                            <div className="flex-box flex-col items-start w-5/6">
+                                <div className="hidden md:flex tooltip tooltip-right pr-2 text-left" data-tip="Only Pro users can see researchers' names">
                                     <p className="font-medium text-md cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
                                 </div>
-                                <p className="font-medium text-md cursor-default md:hidden" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
-                                <p className="font-light text-sm">{author?.position} at {author?.institution}</p>
+                                    <p className="font-medium text-md cursor-default md:hidden" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
+                                    <p className="font-light text-sm line-clamp-2">{author?.position} at {author?.institution}</p>
                             </div>
                         </div>
                     </div>
-                    <p>{showFullDescription ? item?.description : `${item?.description?.slice(0, 100)}${item?.description?.length > 100 ? "..." : ""}`}</p>
-                    <a className={`${item?.description?.length <= 100 ? "hidden" : "link"}`} onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
+                    <p>{item?.description ? showFullDescription ? item?.description : `${item?.description?.slice(0, 75)}${item?.description?.length > 75 ? "..." : ""}` : "No description."}</p>
+                    <a className={`${item?.description?.length <= 75 || !item?.description ? "hidden" : "link"}`} onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
                 </div>   
                 <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary flex-box gap-3 w-full"><FaHandsClapping />Collaborate</button>   
             </div>

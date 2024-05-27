@@ -8,7 +8,7 @@
   }
 
   h1 {
-    @apply font-bold text-base text-3xl md:text-4xl; 
+    @apply font-bold text-base text-4xl; 
   }
 
   h2 {
@@ -16,7 +16,7 @@
   }
 
   .subtitle {
-    @apply w-full md:w-1/2 text-sm md:text-base;
+    @apply w-full md:w-1/2 text-base;
   }
 
   label {
@@ -60,7 +60,7 @@
   }
   
   .tag {
-    @apply bg-white border border-[#dee1e7] rounded px-3 py-1 w-max text-sm font-semibold;
+    @apply bg-white border border-[#dee1e7] rounded px-3 py-1 w-max text-sm text-center font-semibold;
   }
 
   .bg-image {
