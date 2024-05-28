@@ -7,7 +7,7 @@ export async function POST(req) {
         const { data, error } = await supabase
             .from("posts")
             .insert([
-                { description: postData.description, title: postData.title, categories: [postData.categories], author: user.id },
+                { description: postData.description, title: postData.title, categories: [postData.categories], author: user.email },
             ])
             .select()
         return NextResponse.json({ data: data })

@@ -13,7 +13,7 @@ export default function Footer() {
                     </div>
                     <p className="text-sm pt-3 text-center md:text-left">Find scientific collaborations in minutes</p>
                     <p className="text-sm text-center md:text-left">Portiko © 2024 All rights reserved</p>
-                    <p className="text-sm pt-3 text-center md:text-left text-xs">To delete your profile or posts,<br/> please email dani@joinportiko.com.</p>
+                    <p className="text-sm pt-3 text-center md:text-left text-xs">To delete your profile or posts,<br/> please email joinportiko@gmail.com.</p>
                 </div>
                 <div className="md:flex md:justify-end items-start space-y-12 md:space-y-0 gap-24 text-lg md:text-sm">
                     {/*Contact*/}
@@ -21,7 +21,7 @@ export default function Footer() {
                         <p className="font-semibold text-lg pb-2">Contact</p>
                         <div className="space-y-1">
                             <div>
-                                <a href="mailto:dani@joinportiko.com" target="_blank" className="hover:underline px-12 md:px-0">dani@joinportiko.com</a>
+                                <a href="mailto:joinportiko@gmail.com" target="_blank" className="hover:underline px-12 md:px-0">joinportiko@gmail.com</a>
                             </div> 
                         </div>
                     </div>
