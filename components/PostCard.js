@@ -123,7 +123,7 @@ export default function PostCard({ user, item }) {
                         <form method="dialog" className="flex-box flex-col items-end w-full space-y-6" >
                             <div className="form-section">
                                 <label>Write them a message <a className="font-light">(Optional)</a></label>
-                                <textarea value={comment} onChange={(e) => setComment(e.target.value)} type="text" id="comment" name="comment" className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder={`Hi, I would love to collaborate!`}></textarea>
+                                <textarea value={comment} onChange={(e) => setComment(e.target.value)} type="text" id="comment" name="comment" className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder={`Hi, I would love you to collaborate on my paper!`}></textarea>
                             </div>        
                             <div className="flex-box justify-between w-full gap-12">
                                 <button onClick={(e) => sendCollabEmail(e)} className="flex-box gap-3 button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Ask for a collaboration"}<IoSend className={`${loading ? "hidden" : ""}`} /></button>

@@ -1,4 +1,5 @@
 "use client"
+import Head from "next/head"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import Cookies from "js-cookie"
@@ -32,6 +33,22 @@ export default function PrivacyPolicy() {
     }, [Cookies])
     return (
         <>
+            <Head>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="description" content="Portiko | Find scientific collaborations in seconds"/>
+                <meta property="og:title" content="Portiko" />
+                <meta property="og:description" content="Portiko | Find scientific collaborations in seconds" />
+                <meta property="og:image" content="/icon.png" />
+                <meta property="og:url" content="joinportiko.com" />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Portiko" />
+                <meta name="twitter:description" content="Portiko | Find scientific collaborations in seconds" />
+                <meta name="twitter:image" content="/icon.png" />
+                <link rel="icon" href="/icon.png" />
+                <title>Portiko</title>
+            </Head>
             <main className="mt-6 md:mt-12 text-[#30313D]">
                 <div className="mx-6 md:mx-24 space-y-12 pb-12">
                     <Header user={user} />

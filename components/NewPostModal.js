@@ -83,7 +83,7 @@ export default function NewPostModal({ user }) {
         <div className="modal-box space-y-6">
           <div className="modal-action">
             <form method="dialog" className="flex-box flex-col items-center w-full space-y-6" >
-              <p className="font-extrabold text-2xl text-center">Post a new technique</p>
+              <p className="font-extrabold text-2xl text-center">Post a new technique you do</p>
               <div className="w-full space-y-3">
                 <div className="form-section">
                   <label htmlFor="Title">Name of the analysis, experiment or technique</label>
