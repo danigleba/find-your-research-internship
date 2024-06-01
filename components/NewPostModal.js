@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Toast from "./Toast"
 
-export default function NewPostModal({ user }) {
+export default function NewPostModal({ user, getUserPosts}) {
   const categories = ["STEM", "Humanities", "Social Sciences", "Health",  "Arts"]
   const [showToast, setShowToast] = useState(false)
   const [postData, setPostData] = useState({
@@ -50,6 +50,7 @@ export default function NewPostModal({ user }) {
       closeNewPostModal()
       setPostData({title: "", description: "", category: "STEP"})
       showSuccessToast()
+      getUserPosts()
       setLoading(false)
     }
     else {

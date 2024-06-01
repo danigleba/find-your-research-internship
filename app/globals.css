@@ -32,8 +32,13 @@
   }
 
   .button-tertiary {
-    @apply border border-[#4040e6] text-[#4040e6] font-medium;
+    @apply border border-[#4040e6] text-[#4040e6] font-medium hover:bg-[#4040e6] hover:text-white transition;
   }
+
+  .button-delete {
+    @apply border border-[#ef233c] text-[#ef233c] font-medium hover:bg-[#ef233c] hover:text-white transition;
+  }
+
 
   .link {
     @apply text-[#4040e6] font-medium cursor-pointer no-underline;

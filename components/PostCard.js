@@ -1,10 +1,12 @@
-import { use, useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 import AuthModal from "./AuthModal"
 import Toast from "./Toast"
 import { FaHandsClapping } from "react-icons/fa6"
 import { IoSend } from "react-icons/io5"
 
 export default function PostCard({ user, item }) {
+    const router = useRouter()
     const [author, setAuthor] = useState({})
     const [showFullDescription, setShowFullDescription] = useState(false)
     const [comment, setComment] = useState("")
@@ -85,14 +87,14 @@ export default function PostCard({ user, item }) {
                 <div className="space-y-6">
                     <div className="space-y-3">
                         <p className="font-extrabold text-2xl">{item?.title}</p>
-                        <div className="flex-box justify-start gap-3">
+                        <div onClick={() => router.push(`/profile/${author?.id}`)} className="flex-box justify-start gap-3 cursor-pointer">
                             <div className="profile w-12" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div className="flex-box flex-col items-start w-5/6">
                                 <div className="hidden md:flex tooltip tooltip-right pr-2 text-left" data-tip="Only Pro users can see researchers' names">
                                     <p className="font-medium text-md cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
                                 </div>
-                                    <p className="font-medium text-md cursor-default md:hidden" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
-                                    <p className="font-light text-sm line-clamp-2">{author?.position} at {author?.institution}</p>
+                                <p className="font-medium text-md cursor-default md:hidden" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
+                                <p className="font-light text-sm line-clamp-2">{author?.position} at {author?.institution}</p>
                             </div>
                         </div>
                     </div>
