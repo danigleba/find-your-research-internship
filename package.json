@@ -15,7 +15,6 @@
     "csv-parser": "^3.0.0",
     "fs": "^0.0.1-security",
     "js-cookie": "^3.0.5",
-    "jsonwebtoken": "^9.0.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
