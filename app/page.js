@@ -133,7 +133,7 @@ export default function Home() {
                   {/*Skeleton*/}
                   {posts.length == 0 && (
                     Array.from({ length: 6 }).map((_, index) => (
-                      <div className="flex flex-col gap-4 w-full pb-12">
+                      <div key={index} className="flex flex-col gap-4 w-full pb-12">
                         <div className="skeleton h-40 w-full"></div>
                         <div className="skeleton h-4 w-28"></div>
                         <div className="skeleton h-4 w-full"></div>
@@ -142,7 +142,7 @@ export default function Home() {
                     ))
                   )}
                   {posts?.map((item, index) => (
-                    <PostCard user={user} key={index} item={item} />
+                    <PostCard key={index} user={user} item={item} />
                   ))}
                 </div>
               </div>

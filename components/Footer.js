@@ -11,9 +11,8 @@ export default function Footer() {
                     <div className="flex items-center justify-center md:justify-start gap-2">
                         <p className={`${rubik.className} text-[#30313D] text-2xl font-bold`}>Portiko</p>
                     </div>
-                    <p className="text-sm pt-3 text-center md:text-left">Find scientific collaborations in minutes</p>
+                    <p className="text-sm pt-3 text-center md:text-left">Find scientific collaborations in seconds</p>
                     <p className="text-sm text-center md:text-left">Portiko © 2024 All rights reserved</p>
-                    <p className="text-sm pt-3 text-center md:text-left text-xs">To delete your profile or posts,<br/> please email joinportiko@gmail.com.</p>
                 </div>
                 <div className="md:flex md:justify-end items-start space-y-12 md:space-y-0 gap-24 text-lg md:text-sm">
                     {/*Contact*/}

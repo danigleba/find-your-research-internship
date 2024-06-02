@@ -31,7 +31,7 @@ export default function Header({ user, getUserPosts }) {
       <a href="/" className={`${rubik.className} text-[#30313D] text-xl md:text-2xl font-bold`}>Portiko</a>
       {!user && (
         <div className="flex-box gap-6">
-          <button onClick={() => openLoginModal()} className="button-secondary">Login</button>
+          <button onClick={() => openLoginModal()} className="button-secondary">Log in</button>
           <button onClick={() => openSignupModal()} className="button-tertiary hover:bg-[#4040e6] hover:text-white transition">Sign Up</button>
         </div>
       )}
