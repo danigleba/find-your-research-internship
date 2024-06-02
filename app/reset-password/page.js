@@ -2,7 +2,6 @@
 import Head from "next/head"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import jwt from "jsonwebtoken"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 
