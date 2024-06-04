@@ -13,7 +13,6 @@ export async function POST(req) {
             body: JSON.stringify({ password: newPassword })
         })
         const data = await response.json()
-        console.log(data)
 
         return NextResponse.json({ data: data })
     } catch (error) {

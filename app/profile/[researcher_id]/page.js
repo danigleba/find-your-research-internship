@@ -55,7 +55,7 @@ export default function Home() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email: researcher?.email })
+            body: JSON.stringify({ id: researcher_id })
         })
         const data = await response.json({})
         setPosts(data.data)
