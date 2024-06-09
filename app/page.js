@@ -113,7 +113,8 @@ export default function Home() {
   }, [page])
 
   useEffect(() => {
-    getPosts()
+    if (section == "posts") getPosts()
+    else getProjects()
   }, [section])
   return (
     <>
