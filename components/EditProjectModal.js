@@ -74,10 +74,10 @@ export default function EditProjectModal({ user, item, getUserProjects }) {
     }
     return (
         <>
-            <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#f9f9f9]">
+            <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#30313D] text-white">
                 <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer gap-6 p-0 rom-violet-600 to-indigo-600">
                     <div className={`${!user?.institution ? "invisible" : ""} tag bg-[#30313D] text-white truncate`}>{user?.institution}</div>
-                    <div className="tag whitespace-nowrap">Project</div>
+                    <div className="tag whitespace-nowrap text-[#30313D]">Project</div>
                 </div>
                 <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
                     <div className="space-y-6">
@@ -102,7 +102,7 @@ export default function EditProjectModal({ user, item, getUserProjects }) {
                         <button onClick={() => document.getElementById(`editProject-${item.id}`).showModal()} className="button-tertiary flex-box gap-3 w-full"><FaEdit />Edit</button>   
                     </div>
                 </div>
-                <dialog id={`editProject-${item.id}`} className="modal">
+                <dialog id={`editProject-${item.id}`} className="modal text-[#30313D]">
                     <div className="modal-box space-y-6">
                         <div className="space-y-3">
                             <div className="flex-box gap-3 justify-start">
@@ -137,7 +137,7 @@ export default function EditProjectModal({ user, item, getUserProjects }) {
                         </div>
                     </div>
                 </dialog>
-                <dialog id={`deleteProject-${item.id}`} className="modal">
+                <dialog id={`deleteProject-${item.id}`} className="modal text-[#30313D]">
                     <div className="modal-box space-y-6">
                         <div className="modal-action">
                             <form method="dialog" className="flex-box flex-col items-end w-full space-y-6" >

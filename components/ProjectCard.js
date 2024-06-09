@@ -78,10 +78,10 @@ export default function ProjectCard({ user, item }) {
         if (item?.author) getPostAuthor()
     }, [item?.author])
     return (
-        <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#f9f9f9]">
+        <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#30313D] text-white">
             <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer gap-6 p-0 rom-violet-600 to-indigo-600">
                 <div className={`${!author?.institution ? "invisible" : ""} tag bg-[#30313D] text-white truncate`}>{author?.institution}</div>
-                <div className="tag whitespace-nowrap">Project</div>
+                <div className="tag whitespace-nowrap text-[#30313D]">Project</div>
             </div>
             <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
                 <div className="space-y-6">
@@ -103,7 +103,7 @@ export default function ProjectCard({ user, item }) {
                 </div>   
                 <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary flex-box gap-3 w-full"><FaHandsClapping />Collaborate</button>   
             </div>
-            <dialog id={`collabModal-${item.title}-${author?.name}`} className="modal">
+            <dialog id={`collabModal-${item.title}-${author?.name}`} className="modal text-[#30313D]">
                 <div className="modal-box space-y-6">
                     <div className="space-y-3">
                         <div className="flex-box gap-3 justify-start">
