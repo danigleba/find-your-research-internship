@@ -4,7 +4,7 @@ import Toast from "./Toast"
 import { MdDelete } from "react-icons/md"
 import { FaEdit } from "react-icons/fa"
 
-export default function EditPostModal({ user, item, getUserPosts }) {
+export default function EditProjectModal({ user, item, getUserProjects }) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [title, setTitle] = useState(item?.title)
@@ -12,11 +12,11 @@ export default function EditPostModal({ user, item, getUserPosts }) {
     const [showToast, setShowToast] = useState(false)
     const [showFullDescription, setShowFullDescription] = useState(false)
 
-    const saveEditedPost = async (e) => {
+    const saveEditedProjects = async (e) => {
         e.preventDefault()
         setLoading(true)
         try {
-            const response = await fetch("/api/db/updatePost", {
+            const response = await fetch("/api/db/updateProject", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export default function EditPostModal({ user, item, getUserPosts }) {
                 await closePostModal()
                 setLoading(false)
                 showSuccessToast()
-                getUserPosts()
+                getUserProjects()
             }
         } catch (error) {
             console.error("Error fetching data:", error)
@@ -36,11 +36,11 @@ export default function EditPostModal({ user, item, getUserPosts }) {
         } 
     }
 
-    const deletePost = async (e) => {
+    const deleteProject = async (e) => {
         e.preventDefault()
         setLoading(true)
         try {
-            const response = await fetch("/api/db/deletePost", {
+            const response = await fetch("/api/db/deleteProject", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export default function EditPostModal({ user, item, getUserPosts }) {
             })
             const data = await response.json()
             if (data) {
-                await getUserPosts()
+                await getUserProjects()
                 setLoading(false)
             }
         } catch (error) {
@@ -59,7 +59,7 @@ export default function EditPostModal({ user, item, getUserPosts }) {
     }
 
     const closePostModal = async () => {
-        const closeButton = document.getElementById(`closeEditPostModal-${item.id}`)
+        const closeButton = document.getElementById(`closeEditProjectModal-${item.id}`)
         closeButton.click()
     }
     
@@ -77,12 +77,12 @@ export default function EditPostModal({ user, item, getUserPosts }) {
             <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#f9f9f9]">
                 <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer gap-6 p-0 rom-violet-600 to-indigo-600">
                     <div className={`${!user?.institution ? "invisible" : ""} tag bg-[#30313D] text-white truncate`}>{user?.institution}</div>
-                    <div className="tag whitespace-nowrap">Skill</div>
+                    <div className="tag whitespace-nowrap">Project</div>
                 </div>
                 <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
                     <div className="space-y-6">
                         <div className="space-y-3">
-                            <p className="font-extrabold text-2xl">I will do {item?.title}</p>
+                            <p className="font-extrabold text-2xl">I'm looking for {item?.title}</p>
                             <div onClick={() => router.push(`/profile/${user?.id}`)} className="flex-box justify-start gap-3 cursor-pointer">
                                 <div className="profile w-12" style={{ backgroundImage: `url(${user?.profile_picture ? user?.profile_picture : "/profile.png"})` }}></div>
                                 <div className="flex-box flex-col items-start w-5/6">
@@ -98,11 +98,11 @@ export default function EditPostModal({ user, item, getUserPosts }) {
                         <a className={`${item?.description?.length <= 75 || !item?.description ? "hidden" : "link"}`} onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
                     </div>   
                     <div className="flex-box gap-6 w-full">
-                        <button onClick={() => document.getElementById(`deletePost-${item.id}`).showModal()} className="flex-box gap-3 button-delete w-full"><MdDelete />Delete</button>
-                        <button onClick={() => document.getElementById(`editPost-${item.id}`).showModal()} className="button-tertiary flex-box gap-3 w-full"><FaEdit />Edit</button>   
+                        <button onClick={() => document.getElementById(`deleteProject-${item.id}`).showModal()} className="flex-box gap-3 button-delete w-full"><MdDelete />Delete</button>
+                        <button onClick={() => document.getElementById(`editProject-${item.id}`).showModal()} className="button-tertiary flex-box gap-3 w-full"><FaEdit />Edit</button>   
                     </div>
                 </div>
-                <dialog id={`editPost-${item.id}`} className="modal">
+                <dialog id={`editProject-${item.id}`} className="modal">
                     <div className="modal-box space-y-6">
                         <div className="space-y-3">
                             <div className="flex-box gap-3 justify-start">
@@ -128,33 +128,33 @@ export default function EditPostModal({ user, item, getUserPosts }) {
                                 </div>        
                                 <div className="flex-box justify-between w-full gap-12">
                                     <button className="flex-box gap-3 button-delete w-full">Cancel</button>
-                                    <button onClick={(e) => saveEditedPost(e)} className="flex-box gap-3 button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Save"}</button>
+                                    <button onClick={(e) => saveEditedProjects(e)} className="flex-box gap-3 button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Save"}</button>
                                 </div>
                             </form>
                             <form method="dialog">
-                                <button id={`closeEditPostModal-${item.id}`} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
+                                <button id={`closeEditProjectModal-${item.id}`} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
                             </form>
                         </div>
                     </div>
                 </dialog>
-                <dialog id={`deletePost-${item.id}`} className="modal">
+                <dialog id={`deleteProject-${item.id}`} className="modal">
                     <div className="modal-box space-y-6">
                         <div className="modal-action">
                             <form method="dialog" className="flex-box flex-col items-end w-full space-y-6" >
                                 <h2 className="text-center w-full">Are you sure you want to delete this?</h2>      
                                 <div className="flex-box justify-between w-full gap-12">
                                     <button className="flex-box gap-3 button-delete w-full">Cancel</button>
-                                    <button onClick={(e) => deletePost(e)} className="flex-box gap-3 button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Yes"}</button>
+                                    <button onClick={(e) => deleteProject(e)} className="flex-box gap-3 button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Yes"}</button>
                                 </div>
                             </form>
                             <form method="dialog">
-                                <button id={`closeEditPostModal-${item.id}`} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
+                                <button id={`closeEditProjectModal-${item.id}`} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
                             </form>
                         </div>
                     </div>
                 </dialog>
                 {showToast == true && (
-                    <Toast text="Post updated!" />                
+                    <Toast text="Project updated!" />                
                 )}
             </main> 
         </>

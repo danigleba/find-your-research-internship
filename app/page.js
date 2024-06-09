@@ -1,17 +1,22 @@
 "use client"
 import Head from "next/head"
+import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState, Suspense} from "react"
 import Cookies from "js-cookie"
 import Header from "@/components/Header"
 import PostCard from "@/components/PostCard"
+import ProjectCard from "@/components/ProjectCard"
 import Footer from "@/components/Footer"
 import Hero from "@/components/Hero"
 import Pagination from "@/components/Pagination"
 
 export default function Home() {
+  const router = useRouter()
   const searchParams = useSearchParams()
+  const section = searchParams.get("section") || "posts"
   const [posts, setPosts] = useState([])
+  const [projects, setProjects] = useState([])
   const [user, setUser] = useState({})
   const [search, setSearch] = useState("")
   const page = searchParams.get("page") || 0
@@ -41,10 +46,26 @@ export default function Home() {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({page: page})
+        body: JSON.stringify({ page: page })
       })
       const data = await response.json({})
       setPosts(data.data)
+    } catch (error) {
+        console.error("Error fetching data:", error)
+    }
+  }
+
+  const getProjects = async () => {
+    try {
+      const response = await fetch("/api/db/getProjects", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ page: page })
+      })
+      const data = await response.json({})
+      setProjects(data.data)
     } catch (error) {
         console.error("Error fetching data:", error)
     }
@@ -87,8 +108,13 @@ export default function Home() {
   }, [Cookies])
 
   useEffect(() => {
-    getPosts()
+    if (section == "posts") getPosts()
+    else getProjects()
   }, [page])
+
+  useEffect(() => {
+    getPosts()
+  }, [section])
   return (
     <>
       <Head>
@@ -128,10 +154,15 @@ export default function Home() {
                       <p>Search</p>
                     </button>
                   </form>
+                  <div className="flex-box gap-6">
+                    <button onClick={() => router.push(`/?section=posts${!user ? "#content" : ""}`)} className={`${section == "posts" ? "bg-[#30313D] text-white" : "text-[#30313D]"} tag-lg`}>Skills</button>
+                    <button onClick={() => router.push(`/?section=projects${!user ? "#content" : ""}`)} className={`${section == "projects" ? "bg-[#30313D] text-white" : "text-[#30313D]"} tag-lg`}>Projects</button>
+                  </div>
                 </div>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
                   {/*Skeleton*/}
-                  {posts.length == 0 && (
+                  {posts?.length == 0 && (
                     Array.from({ length: 6 }).map((_, index) => (
                       <div key={index} className="flex flex-col gap-4 w-full pb-12">
                         <div className="skeleton h-40 w-full"></div>
@@ -141,14 +172,25 @@ export default function Home() {
                       </div>
                     ))
                   )}
-                  {posts?.map((item, index) => (
-                    <PostCard key={index} user={user} item={item} />
-                  ))}
+                  {section == "posts" && (
+                    <>
+                      {posts?.map((item, index) => (
+                        <PostCard key={index} user={user} item={item} /> 
+                      ))}
+                    </>
+                  )}
+                  {section == "projects" && (
+                    <>
+                      {projects?.map((item, index) => (
+                        <ProjectCard key={index} user={user} item={item} />
+                      ))}
+                    </>
+                  )}
                 </div>
               </div>
             </div>
           </div>
-          {isSearchResult == false && (
+          {isSearchResult == false && section != "projects" && (
             <Pagination page={page} user={user}/>
           )}
           <Footer />

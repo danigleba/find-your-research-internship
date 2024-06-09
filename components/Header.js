@@ -8,7 +8,7 @@ import { IoLogOut } from "react-icons/io5"
 
 const rubik = Rubik({ subsets: ["latin"] })
 
-export default function Header({ user, getUserPosts }) {
+export default function Header({ user, getUserPosts, getUserProjects }) {
   const router = useRouter()
   const [authOption, setAuthOption] = useState("Login")
 
@@ -46,7 +46,7 @@ export default function Header({ user, getUserPosts }) {
         </div>
       )}
       <AuthModal baseAuthOption={authOption}/>
-      <NewPostModal user={user} getUserPosts={getUserPosts} />
+      <NewPostModal user={user} getUserPosts={getUserPosts} getUserProjects={getUserProjects} />
     </main>
   )
 }

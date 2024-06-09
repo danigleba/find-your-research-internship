@@ -39,7 +39,6 @@
     @apply border border-[#ef233c] text-[#ef233c] font-medium hover:bg-[#ef233c] hover:text-white transition;
   }
 
-
   .link {
     @apply text-[#4040e6] font-medium cursor-pointer no-underline;
   }
@@ -66,6 +65,10 @@
   
   .tag {
     @apply bg-white border border-[#dee1e7] rounded px-3 py-1 w-max text-sm text-center font-semibold;
+  }
+
+  .tag-lg {
+    @apply border border-[#dee1e7] px-6 py-2 rounded-md font-medium transition; 
   }
 
   .bg-image {

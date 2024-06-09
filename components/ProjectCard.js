@@ -5,7 +5,7 @@ import Toast from "./Toast"
 import { FaHandsClapping } from "react-icons/fa6"
 import { IoSend } from "react-icons/io5"
 
-export default function PostCard({ user, item }) {
+export default function ProjectCard({ user, item }) {
     const router = useRouter()
     const [author, setAuthor] = useState({})
     const [showFullDescription, setShowFullDescription] = useState(false)
@@ -81,12 +81,12 @@ export default function PostCard({ user, item }) {
         <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#f9f9f9]">
             <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer gap-6 p-0 rom-violet-600 to-indigo-600">
                 <div className={`${!author?.institution ? "invisible" : ""} tag bg-[#30313D] text-white truncate`}>{author?.institution}</div>
-                <div className="tag whitespace-nowrap">Skill</div>
+                <div className="tag whitespace-nowrap">Project</div>
             </div>
             <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
                 <div className="space-y-6">
                     <div className="space-y-3">
-                        <p className="font-extrabold text-2xl">I will do {item?.title}</p>
+                        <p className="font-extrabold text-2xl">I'm looking for {item?.title}</p>
                         <div onClick={() => router.push(`/profile/${author?.id}`)} className="flex-box justify-start gap-3 cursor-pointer">
                             <div className="profile w-12" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div className="flex-box flex-col items-start w-5/6">
@@ -117,7 +117,7 @@ export default function PostCard({ user, item }) {
                             </div>
                         </div>
                         <div className="space-y-3">
-                            <p className="font-bold text-2xl">I will do {item?.title}</p>
+                            <p className="font-bold text-2xl">I'm looking for {item?.title}</p>
                             <p><b>Note:</b> The researcher will get your contact information (name, e-mail, position and institution).</p>
                         </div>
                     </div>

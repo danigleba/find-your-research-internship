@@ -7,12 +7,14 @@ import Cookies from "js-cookie"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import PostCard from "@/components/PostCard"
+import ProjectCard from "@/components/ProjectCard"
 
 export default function Home() {
     const params = useParams()
     const { researcher_id } = params
     const [researcher, setResearcher] = useState({})
     const [posts, setPosts] = useState([])
+    const [projects, setProjects] = useState([])
     const [user, setUser] = useState({})
 
     const getUserData = async () => {
@@ -64,6 +66,22 @@ export default function Home() {
         }
     }
 
+    const getResearcherProjects = async () => {
+        try {
+        const response = await fetch("/api/db/getResearcherProjects", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: researcher_id })
+        })
+        const data = await response.json({})
+        setProjects(data.data)
+        } catch (error) {
+            console.error("Error fetching data:", error)
+        }
+    }
+
     useEffect(() => {
         getUserData()
     }, [Cookies])
@@ -73,7 +91,10 @@ export default function Home() {
     }, [researcher_id])
 
     useEffect(() => {
-       if (researcher?.email) getResearcherPosts()
+        if (researcher?.email) {
+            getResearcherPosts()
+            getResearcherProjects()
+        }
     }, [researcher])
     return (
     <>
@@ -107,21 +128,43 @@ export default function Home() {
                         <p className="font-light text-sm line-clamp-2">{researcher?.position} at {researcher?.institution}</p>
                     </div>
                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
-                    {/*Skeleton*/}
-                    {posts.length == 0 && (
-                        Array.from({ length: 3 }).map((_, index) => (
-                        <div key={index} className="flex flex-col gap-4 w-full pb-12">
-                            <div className="skeleton h-40 w-full"></div>
-                            <div className="skeleton h-4 w-28"></div>
+               <div className="space-y-6">
+                    <h2 className="text-xl">Skills</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
+                        {/*Skeleton*/}
+                        {posts.length == 0 && (
+                            Array.from({ length: 3 }).map((_, index) => (
+                            <div key={index} className="flex flex-col gap-4 w-full pb-12">
+                                <div className="skeleton h-40 w-full"></div>
+                                <div className="skeleton h-4 w-28"></div>
+                                <div className="skeleton h-4 w-full"></div>
                             <div className="skeleton h-4 w-full"></div>
-                        <div className="skeleton h-4 w-full"></div>
-                        </div>
-                        ))
-                    )}
-                    {posts?.map((item, index) => (
-                        <PostCard key={index} user={user} item={item} />
-                    ))}
+                            </div>
+                            ))
+                        )}
+                        {posts?.map((item, index) => (
+                            <PostCard key={index} user={user} item={item} />
+                        ))}
+                    </div>
+                </div>
+                <div className="space-y-6">
+                    <h2 className="text-xl">Projects</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
+                        {/*Skeleton*/}
+                        {projects.length == 0 && (
+                            Array.from({ length: 3 }).map((_, index) => (
+                            <div key={index} className="flex flex-col gap-4 w-full pb-12">
+                                <div className="skeleton h-40 w-full"></div>
+                                <div className="skeleton h-4 w-28"></div>
+                                <div className="skeleton h-4 w-full"></div>
+                            <div className="skeleton h-4 w-full"></div>
+                            </div>
+                            ))
+                        )}
+                        {projects?.map((item, index) => (
+                            <ProjectCard key={index} user={user} item={item} />
+                        ))}
+                    </div>
                 </div>
             </div>
             <Footer />

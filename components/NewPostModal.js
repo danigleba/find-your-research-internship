@@ -1,13 +1,15 @@
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import Toast from "./Toast"
 
-export default function NewPostModal({ user, getUserPosts}) {
-  const categories = ["STEM", "Humanities", "Social Sciences", "Health",  "Arts"]
+export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
+  const router = useRouter()
   const [showToast, setShowToast] = useState(false)
   const [postData, setPostData] = useState({
     title: "",
     description: "",
     categories: "STEM",
+    section: "posts"
   })
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
@@ -48,9 +50,11 @@ export default function NewPostModal({ user, getUserPosts}) {
     const data = await response.json()
     if (data) {
       closeNewPostModal()
-      setPostData({title: "", description: "", category: "STEP"})
+      setPostData({title: "", description: "", category: "STEP", section: "posts"})
       showSuccessToast()
       getUserPosts()
+      getUserProjects()
+      router.refresh()
       setLoading(false)
     }
     else {
@@ -85,27 +89,31 @@ export default function NewPostModal({ user, getUserPosts}) {
           <div className="modal-action">
             <form method="dialog" className="flex-box flex-col items-center w-full space-y-6" >
               <p className="font-extrabold text-2xl text-center">Post a new technique you do</p>
-              <div className="w-full space-y-3">
+              <div className="w-full space-y-6">
                 <div className="form-section">
                   <label htmlFor="Title">Name of the analysis, experiment or technique</label>
                   <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Identification and characterization of microorganism " className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
                   {errors.title && <p className="error">{errors.title}</p>}
                 </div>
                 <div className="form-section">
+                  <label htmlFor="Title">I have...</label>
+                  <div className="flex-box flex-col items-start gap-2">
+                    <div className="flex-box gap-3 text-sm font-medium"> 
+                      <input type="radio" onChange={(e) => handleChange(e, postData)} checked={postData?.section == "posts" || !postData?.section} name="section" value="posts" id="posts" className="radio"  />
+                      <p>a skill and I'm looking to join a project</p>
+                    </div>
+                    <div className="flex-box gap-3 text-sm font-medium"> 
+                      <input type="radio" onChange={(e) => handleChange(e, postData)} checked={postData?.section == "projects"}  name="section" value="projects" id="projects" className="radio" />
+                      <p>a project and I'm looking for collaborators</p>
+                    </div>
+                                      
+                  </div>
+                </div>
+                <div className="form-section">
                   <label htmlFor="Description">Description</label>
                   <textarea value={postData?.description} onChange={(e) => handleChange(e, postData)} type="text" id="description" name="description" rows={3} className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder="Experiment the identification and characterization of microorganism using techniques like..."></textarea>
                   {errors.description && <p className="error">{errors.description}</p>}
                 </div>      
-                <div className="form-section">
-                  <label htmlFor="categories">Area</label>
-                  <div className="w-full border border-gray-300 rounded-lg px-3 overflow-hidden" >
-                    <select value={postData?.categories} onChange={(e) => handleChange(e, postData)} id="categories" name="categories" className="w-full h-12 focus:outline-none focus:ring-0 ">
-                      {categories.map((item, index) => (
-                        <option key={index} value={item}>{item}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
               </div>
               <div className="flex-box flex-col items-center space-y-3 w-full">
                 <button type="submit" onClick={(e) => checkForm(e, postData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full "></span> : "Post collaboration"}</button>

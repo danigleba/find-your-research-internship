@@ -6,11 +6,13 @@ import Cookies from "js-cookie"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import EditPostModal from "@/components/EditPostModal"
+import EditProjectModal from "@/components/EditProjectModal"
 import Toast from "@/components/Toast"
 
 export default function Home() {
     const router = useRouter()
     const [posts, setPosts] = useState([])
+    const [projects, setProjects] = useState([])
     const [user, setUser] = useState({})
     const [loading, setLoading] = useState(false)
     const [profileData, setProfileData] = useState({})
@@ -45,6 +47,23 @@ export default function Home() {
         const data = await response.json()
         if (data?.data?.[0]) setPosts(data?.data)
         else setPosts([])
+        } catch (error) {
+        console.error("Error fetching data:", error)
+        } 
+    }
+
+    const getUserProjects = async () => {
+        try {
+        const response = await fetch("/api/db/getUserProjects", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: user?.id})
+        })
+        const data = await response.json()
+        if (data?.data?.[0]) setProjects(data?.data)
+        else setProjects([])
         } catch (error) {
         console.error("Error fetching data:", error)
         } 
@@ -118,7 +137,10 @@ export default function Home() {
     }, [Cookies])
 
     useEffect(() => {
-        if (user?.email) getUserPosts()
+        if (user?.email) {
+            getUserPosts()
+            getUserProjects()
+        }
         setProfileData(user)
     }, [user])
     return (
@@ -142,7 +164,7 @@ export default function Home() {
         <Suspense fallback={<div>Loading...</div>}>
             <main className="mt-6 md:mt-12 text-[#30313D] overflow-hidden">
                 <div className="mx-6 md:mx-24 space-y-12 pb-12">
-                    <Header user={user} getUserPosts={getUserPosts} />
+                    <Header user={user} getUserPosts={getUserPosts} getUserProjects={getUserProjects} />
                     <div className="flex-box flex-col md:flex-row justify-start items-start md:item-center gap-6">
                         <div className="flex-box justify-start gap-3">
                             <div className="profile w-12" style={{ backgroundImage: `url(${user?.profile_picture ? user?.profile_picture : "/profile.png"})` }}></div>
@@ -158,7 +180,9 @@ export default function Home() {
                             <button onClick={() => document.getElementById(`editProfile-${user?.id}`).showModal()} className="button-secondary">Edit Profile</button>
                             <button onClick={() => document.getElementById(`deleteProfile-${user?.id}`).showModal()} className="button-delete">Delete Account</button>
                         </div>
-                </div>
+                    </div>
+                    <div className="space-y-6">
+                    <h2 className="text-xl">Skills</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
                         {/*Skeleton*/}
                         {posts.length == 0 && (
@@ -175,6 +199,26 @@ export default function Home() {
                             <EditPostModal key={index} user={user} item={item} getUserPosts={getUserPosts}/>
                         ))}
                     </div>
+                </div>
+                <div className="space-y-6">
+                    <h2 className="text-xl">Projects</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
+                        {/*Skeleton*/}
+                        {projects.length == 0 && (
+                            Array.from({ length: 3 }).map((_, index) => (
+                            <div key={index} className="flex flex-col gap-4 w-full pb-12">
+                                <div className="skeleton h-40 w-full"></div>
+                                <div className="skeleton h-4 w-28"></div>
+                                <div className="skeleton h-4 w-full"></div>
+                            <div className="skeleton h-4 w-full"></div>
+                            </div>
+                            ))
+                        )}
+                        {projects?.map((item, index) => (
+                            <EditProjectModal key={index} user={user} item={item} getUserProjects={getUserProjects} />
+                        ))}
+                    </div>
+                </div>
                 </div>
                 <Footer />
                 {/*Edit profile modal*/}
