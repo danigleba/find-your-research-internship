@@ -96,7 +96,7 @@ export default function PostCard({ user, item }) {
                                         <p className="font-medium text-md cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
                                     </div>
                                     {author?.verified == true && (
-                                        <div className="hidden md:flex tooltip tooltip-right pr-2 text-left" data-tip="This user is verified">
+                                        <div className="hidden md:flex tooltip tooltip-right pr-2 text-left" data-tip="Verified user">
                                             <BsPatchCheckFill />
                                         </div>
                                     )}  
