@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server"
-import supabase from "@/utils/supabase"
 import supabaseAdmin from "@/utils/supabaseAdmin"
 
 export async function POST(req) {
@@ -8,12 +7,12 @@ export async function POST(req) {
         const { data, error } = await supabaseAdmin.auth.admin.deleteUser(
             `afebaa4b-cd06-4a2d-8093-043424bb79a0`
         )
-        const { dataPosts, errorPosts } = await supabase
+        const { dataPosts, errorPosts } = await supabaseAdmin
             .from("posts")
             .delete()
             .eq("author", email)
 
-        const { dataUser, errorUser } = await supabase
+        const { dataUser, errorUser } = await supabaseAdmin
             .from("users")
             .delete()
             .eq("id", id)

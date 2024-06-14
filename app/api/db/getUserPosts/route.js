@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server"
-import supabase from "@/utils/supabase"
+import supabaseAdmin from "@/utils/supabaseAdmin"
 
 export async function POST(req) {  
     const { id } = await req.json()
     try {
-        let { data: posts, error } = await supabase
+        let { data: posts, error } = await supabaseAdmin
             .from("posts")
             .select("*")
             .eq("author", id)

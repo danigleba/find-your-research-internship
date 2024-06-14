@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server"
-import supabase from "@/utils/supabase"
+import supabaseAdmin from "@/utils/supabaseAdmin";
 
 export async function POST(req) {
     const { search } = await req.json()
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseAdmin
         .from("posts")
         .select()
         .ilike("title", `%${search}%`);
