@@ -101,6 +101,7 @@ export default function Home() {
 
   useEffect(() => {
     getPosts()
+    getProjects()
   }, [])
 
   useEffect(() => {
@@ -111,11 +112,6 @@ export default function Home() {
     if (section == "posts") getPosts()
     else getProjects()
   }, [page])
-
-  useEffect(() => {
-    if (section == "posts") getPosts()
-    else getProjects()
-  }, [section])
   return (
     <>
       <Head>
