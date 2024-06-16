@@ -5,6 +5,7 @@ import { Rubik } from "next/font/google"
 import AuthModal from "./AuthModal"
 import NewPostModal from "./NewPostModal"
 import { IoLogOut } from "react-icons/io5"
+import { CiCirclePlus } from "react-icons/ci"
 
 const rubik = Rubik({ subsets: ["latin"] })
 
@@ -37,7 +38,7 @@ export default function Header({ user, getUserPosts, getUserProjects }) {
       )}
       {user && (
         <div className="flex-box gap-6 justify-start">
-          <button onClick={() => document.getElementById("newPostModal").showModal()} className="button-primary">New Collaboration</button>
+          <button onClick={() => document.getElementById("newPostModal").showModal()} className="button-primary flex-box gap-2"><CiCirclePlus strokeWidth={1.2} size={20}/>Post</button>
           <div onClick={() => router.push("/account")} className="flex-box gap-3 cursor-pointer">
             <p className="hidden md:block font-semibold text-base">{user?.name}</p>
             <div className="profile hidden md:flex" style={{ backgroundImage: `url(${user?.profile_picture ? user?.profile_picture : "/profile.png"})` }}></div>
