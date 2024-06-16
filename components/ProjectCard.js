@@ -86,7 +86,7 @@ export default function ProjectCard({ user, item }) {
             <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
                 <div className="space-y-6">
                     <div className="space-y-3">
-                        <p className="font-extrabold text-2xl">I'm looking for {item?.title}</p>
+                        <p className="font-bold text-2xl"><a className="font-black">I'm looking for</a> {item?.title}</p>
                         <div onClick={() => router.push(`/profile/${author?.id}`)} className="flex-box justify-start gap-3 cursor-pointer">
                             <div className="profile w-12" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div className="flex-box flex-col items-start w-5/6">
