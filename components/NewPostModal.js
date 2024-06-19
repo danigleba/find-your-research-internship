@@ -1,6 +1,9 @@
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Toast from "./Toast"
+import { Rubik } from "next/font/google"
+
+const rubik = Rubik({ subsets: ["latin"] })
 
 export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
   const router = useRouter()
@@ -9,12 +12,13 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
     title: "",
     description: "",
     categories: "STEM",
-    section: "posts"
+    section: ""
   })
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
 
   const handleChange = async (e, form) => {
+    e.preventDefault()
     const { name, value } = e.target
     setPostData({ ...form, [name]: value })
   }
@@ -54,6 +58,7 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
       showSuccessToast()
       getUserPosts()
       getUserProjects()
+      setPostData(prevState => ({...prevState, section: ""}))
       router.refresh()
       setLoading(false)
     }
@@ -88,36 +93,40 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
         <div className="modal-box space-y-6">
           <div className="modal-action">
             <form method="dialog" className="flex-box flex-col items-center w-full space-y-6" >
-              <p className="font-extrabold text-2xl text-center">New Collaboration</p>
-              <div className="w-full space-y-6">
-                <div className="form-section">
-                  <div className="flex-box flex-col items-start gap-2">
-                    <div className="flex-box gap-3 text-sm font-medium"> 
-                      <input type="radio" onChange={(e) => handleChange(e, postData)} checked={postData?.section == "posts" || !postData?.section} name="section" value="posts" id="posts" className="radio"  />
-                      <p>I want to be part of another researcher's project</p>
-                    </div>
-                    <div className="flex-box gap-3 text-sm font-medium"> 
-                      <input type="radio" onChange={(e) => handleChange(e, postData)} checked={postData?.section == "projects"}  name="section" value="projects" id="projects" className="radio" />
-                      <p>I'm looking for researchers to join my project</p>
-                    </div>          
+              {postData.section == "" && (
+                <>
+                  <p className="font-extrabold text-2xl text-center">What are you looking for?</p>
+                  <button onClick={(e) => setPostData(prevState => ({...prevState, section: "posts"}))} className="button-secondary w-full space-y-3 py-3">
+                    <p className={`${rubik.className} text-lg font-extrabold`}>👨🏾‍🔬I want to be part of <br/>another researcher's project</p>
+                    <p className="text-sm font-base">I know how to do XYZ and I would like to participate in other researcher's projects.</p>
+                  </button>
+                  <button onClick={(e) => setPostData(prevState => ({...prevState, section: "projects"}))} className="button-secondary w-full space-y-3">
+                    <p className={`${rubik.className} text-lg font-extrabold`}>🏢 I'm looking for <br/> researchers to join my project</p>
+                    <p className="text-sm font-base">I have a research project, and I’m looking for researchers to help me, doing XYZ.</p>
+                  </button>              
+                </>
+              )}
+              {postData.section != "" && (
+                <>
+                  <p className="font-extrabold text-2xl text-center">Tell us more</p>
+                  <div className="w-full space-y-6">
+                    <div className="form-section">
+                      <label htmlFor="Title">Name of the experiment or technique you {postData.section == "posts" ? "do": "need"}</label>
+                      <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Identification and characterization of microorganism " className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                      {errors.title && <p className="error">{errors.title}</p>}
+                    </div>        
+                    <div className="form-section">
+                      <label htmlFor="Description">Description</label>
+                      <textarea value={postData?.description} onChange={(e) => handleChange(e, postData)} type="text" id="description" name="description" rows={3} className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder="Experiment the identification and characterization of microorganism using techniques like..."></textarea>
+                      {errors.description && <p className="error">{errors.description}</p>}
+                    </div>      
                   </div>
-                </div>
-                <div className="form-section">
-                  <label htmlFor="Title">Name of the experiment or technique you {postData.section == "posts" ? "do": "need"}</label>
-                  <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Identification and characterization of microorganism " className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                  {errors.title && <p className="error">{errors.title}</p>}
-                </div>
-                
-                <div className="form-section">
-                  <label htmlFor="Description">Description</label>
-                  <textarea value={postData?.description} onChange={(e) => handleChange(e, postData)} type="text" id="description" name="description" rows={3} className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder="Experiment the identification and characterization of microorganism using techniques like..."></textarea>
-                  {errors.description && <p className="error">{errors.description}</p>}
-                </div>      
-              </div>
-              <div className="flex-box flex-col items-center space-y-3 w-full">
-                <button type="submit" onClick={(e) => checkForm(e, postData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full "></span> : "Post collaboration"}</button>
-                {errors.apiError && <p className="error">{errors.apiError}</p>}
-              </div>
+                  <div className="flex-box flex-col items-center space-y-3 w-full">
+                    <button type="submit" onClick={(e) => checkForm(e, postData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full "></span> : "Post"}</button>
+                    {errors.apiError && <p className="error">{errors.apiError}</p>}
+                  </div>
+                </>
+              )}      
             </form>
             <form method="dialog">
               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
