@@ -91,20 +91,19 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
               <p className="font-extrabold text-2xl text-center">New Collaboration</p>
               <div className="w-full space-y-6">
                 <div className="form-section">
-                  <label htmlFor="Title">I have...</label>
                   <div className="flex-box flex-col items-start gap-2">
                     <div className="flex-box gap-3 text-sm font-medium"> 
                       <input type="radio" onChange={(e) => handleChange(e, postData)} checked={postData?.section == "posts" || !postData?.section} name="section" value="posts" id="posts" className="radio"  />
-                      <p>a skill and I'm looking to join a project</p>
+                      <p>I want to be part of another researcher's project</p>
                     </div>
                     <div className="flex-box gap-3 text-sm font-medium"> 
                       <input type="radio" onChange={(e) => handleChange(e, postData)} checked={postData?.section == "projects"}  name="section" value="projects" id="projects" className="radio" />
-                      <p>a project and I'm looking for collaborators</p>
+                      <p>I'm looking for researchers to join my project</p>
                     </div>          
                   </div>
                 </div>
                 <div className="form-section">
-                  <label htmlFor="Title">Name of the analysis, experiment or technique</label>
+                  <label htmlFor="Title">Name of the experiment or technique you {postData.section == "posts" ? "do": "need"}</label>
                   <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Identification and characterization of microorganism " className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
                   {errors.title && <p className="error">{errors.title}</p>}
                 </div>
