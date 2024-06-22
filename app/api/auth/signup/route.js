@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import supabase from "@/utils/supabase"
+import supabaseAdmin from "@/utils/supabaseAdmin"
 
 export async function POST(req) {
     const { email, password, name, position, department, institution } = await req.json()
@@ -10,12 +11,14 @@ export async function POST(req) {
             email: email,
             password: password,
         })
-        const { dataDB, errorDB } = await supabase
+
+        const { dataDB, errorDB } = await supabaseAdmin
             .from("users")
             .insert([
                 { id: data.user.id, email: email, name: name, position: position, department: department, institution: institution, locale: locale },
             ])
             .select()
+            
         return NextResponse.json({ data: data })
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 })

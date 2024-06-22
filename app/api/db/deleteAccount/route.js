@@ -5,7 +5,7 @@ export async function POST(req) {
     const { id, email } = await req.json()
     try {
         const { data, error } = await supabaseAdmin.auth.admin.deleteUser(
-            `afebaa4b-cd06-4a2d-8093-043424bb79a0`
+            `${id}`
         )
         const { dataPosts, errorPosts } = await supabaseAdmin
             .from("posts")
