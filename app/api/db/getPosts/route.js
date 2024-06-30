@@ -8,6 +8,7 @@ export async function POST(req) {
     const { data: posts, error } = await supabaseAdmin
       .from("posts")
       .select("*")
+      .order("id", { ascending: false }) 
       .range(pageNumber, pageNumber+29)
     return NextResponse.json({ data: posts })
   } catch (error) {
