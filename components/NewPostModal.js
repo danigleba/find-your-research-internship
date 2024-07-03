@@ -12,7 +12,6 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
     title: "",
     description: "",
     categories: "STEM",
-    section: ""
   })
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
@@ -34,7 +33,7 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
           newErrors[item] = `${item} is required`
       }
     }
-
+    console.log(newErrors)
     setErrors(newErrors)
     if (Object.values(form).every(value => value !== "")) {
       uploadNewPost()
@@ -52,13 +51,14 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
         body: JSON.stringify({ user: user, postData: postData })
     })
     const data = await response.json()
+    console.log(data)
     if (data) {
       closeNewPostModal()
-      setPostData({title: "", description: "", category: "STEP", section: "posts"})
+      setPostData({title: "", description: "", category: "STEM"})
       showSuccessToast()
       getUserPosts()
       getUserProjects()
-      setPostData(prevState => ({...prevState, section: ""}))
+      setPostData(prevState => ({...prevState }))
       router.refresh()
       setLoading(false)
     }
@@ -93,40 +93,23 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
         <div className="modal-box space-y-6">
           <div className="modal-action">
             <form method="dialog" className="flex-box flex-col items-center w-full space-y-6" >
-              {postData.section == "" && (
-                <>
-                  <p className="font-extrabold text-2xl text-center">What are you looking for?</p>
-                  <button onClick={(e) => setPostData(prevState => ({...prevState, section: "posts"}))} className="button-secondary w-full space-y-3 py-3">
-                    <p className={`${rubik.className} text-lg font-extrabold`}>👨🏾‍🔬I want to be part of <br/>another researcher's project</p>
-                    <p className="text-sm font-base">I know how to do XYZ and I would like to participate in other researcher's projects.</p>
-                  </button>
-                  <button onClick={(e) => setPostData(prevState => ({...prevState, section: "projects"}))} className="button-secondary w-full space-y-3">
-                    <p className={`${rubik.className} text-lg font-extrabold`}>🏢 I'm looking for <br/> researchers to join my project</p>
-                    <p className="text-sm font-base">I have a research project, and I’m looking for researchers to help me, doing XYZ.</p>
-                  </button>              
-                </>
-              )}
-              {postData.section != "" && (
-                <>
-                  <p className="font-extrabold text-2xl text-center">Tell us more</p>
-                  <div className="w-full space-y-6">
-                    <div className="form-section">
-                      <label htmlFor="Title">Name of the experiment or technique you {postData.section == "posts" ? "do": "need"}</label>
-                      <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Identification and characterization of microorganism " className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                      {errors.title && <p className="error">{errors.title}</p>}
-                    </div>        
-                    <div className="form-section">
-                      <label htmlFor="Description">Description</label>
-                      <textarea value={postData?.description} onChange={(e) => handleChange(e, postData)} type="text" id="description" name="description" rows={3} className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder="Experiment the identification and characterization of microorganism using techniques like..."></textarea>
-                      {errors.description && <p className="error">{errors.description}</p>}
-                    </div>      
-                  </div>
-                  <div className="flex-box flex-col items-center space-y-3 w-full">
-                    <button type="submit" onClick={(e) => checkForm(e, postData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full "></span> : "Post"}</button>
-                    {errors.apiError && <p className="error">{errors.apiError}</p>}
-                  </div>
-                </>
-              )}      
+              <p className="font-extrabold text-2xl text-center">New Post</p>
+              <div className="w-full space-y-6">
+                <div className="form-section">
+                  <label htmlFor="Title">Name of the experiment or technique you do?</label>
+                  <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Identification and characterization of microorganism " className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                  {errors.title && <p className="error">{errors.title}</p>}
+                </div>        
+                <div className="form-section">
+                  <label htmlFor="Description">Description</label>
+                  <textarea value={postData?.description} onChange={(e) => handleChange(e, postData)} type="text" id="description" name="description" rows={3} className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder="Experiment the identification and characterization of microorganism using techniques like..."></textarea>
+                  {errors.description && <p className="error">{errors.description}</p>}
+                </div>      
+              </div>
+              <div className="flex-box flex-col items-center space-y-3 w-full">
+                <button type="submit" onClick={(e) => checkForm(e, postData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full "></span> : "Post"}</button>
+                {errors.apiError && <p className="error">{errors.apiError}</p>}
+              </div>   
             </form>
             <form method="dialog">
               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
