@@ -74,6 +74,10 @@ export default function PrivacyPolicy() {
                                     <p>We use your information to provide and improve Portiko services, process payments, and communicate with you. We do not sell or share your information with third parties, except as required by law.</p>
                                 </div>
                                 <div>
+                                    <h2>Marketing Use of Image</h2>
+                                    <p>We may utilize your profile picture for marketing purposes.</p>
+                                </div>
+                                <div>
                                     <h2>Payment Processing</h2>
                                     <p>Payment information is securely processed by Stripe. We do not store your payment details on our servers.</p>
                                 </div>

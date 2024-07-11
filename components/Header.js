@@ -11,7 +11,7 @@ const rubik = Rubik({ subsets: ["latin"] })
 
 export default function Header({ user, getUserPosts, getUserProjects }) {
   const router = useRouter()
-  const [authOption, setAuthOption] = useState("Login")
+  const [authOption, setAuthOption] = useState("Signup")
 
   const logout = async () => {
     Cookies.remove("portiko-id")
@@ -20,20 +20,22 @@ export default function Header({ user, getUserPosts, getUserProjects }) {
 
   const openLoginModal = async () => {
     setAuthOption("Login")
-    document.getElementById("authModal").showModal()
+    document.getElementById("loginModal").showModal()
   }
 
   const openSignupModal = async () => {
     setAuthOption("Signup")
-    document.getElementById("authModal").showModal()
+    document.getElementById("loginModal").showModal()
   }
   return (
     <main className="flex items-center justify-between w-full">
       <a href="/" className={`${rubik.className} text-[#30313D] text-xl md:text-2xl font-bold`}>Portiko</a>
-      {!user && (
+      <div className="flex-box gap-6">
+        <button onClick={() => openLoginModal()} className="button-secondary">Log in</button>
+      </div>
+      {/*{!user && (
         <div className="flex-box gap-6">
           <button onClick={() => openLoginModal()} className="button-secondary">Log in</button>
-          <button onClick={() => openSignupModal()} className="button-tertiary hover:bg-[#4040e6] hover:text-white transition">Sign Up</button>
         </div>
       )}
       {user && (
@@ -42,10 +44,9 @@ export default function Header({ user, getUserPosts, getUserProjects }) {
           <div onClick={() => router.push("/account")} className="flex-box gap-3 cursor-pointer">
             <p className="hidden md:block font-semibold text-base">{user?.name}</p>
             <div className="profile hidden md:flex" style={{ backgroundImage: `url(${user?.profile_picture ? user?.profile_picture : "/profile.png"})` }}></div>
-            <IoLogOut className="cursor-pointer" onClick={() => logout()} size={30} />
           </div>
         </div>
-      )}
+      )}*/}
       <AuthModal baseAuthOption={authOption}/>
       <NewPostModal user={user} getUserPosts={getUserPosts} getUserProjects={getUserProjects} />
     </main>

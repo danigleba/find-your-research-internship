@@ -91,12 +91,12 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
     <>
       <dialog id="newPostModal" className="modal">
         <div className="modal-box space-y-6">
-          <div className="modal-action">
+          <div className="modal-action mt-0 p-3">
             <form method="dialog" className="flex-box flex-col items-center w-full space-y-6" >
-              <p className="font-extrabold text-2xl text-center">New Post</p>
+              <p className="font-extrabold text-2xl text-center">New Skill</p>
               <div className="w-full space-y-6">
                 <div className="form-section">
-                  <label htmlFor="Title">Name of the experiment or technique you do?</label>
+                  <label htmlFor="Title">Name of the experiment or technique you do</label>
                   <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Identification and characterization of microorganism " className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
                   {errors.title && <p className="error">{errors.title}</p>}
                 </div>        
@@ -107,13 +107,10 @@ export default function NewPostModal({ user, getUserPosts, getUserProjects}) {
                 </div>      
               </div>
               <div className="flex-box flex-col items-center space-y-3 w-full">
-                <button type="submit" onClick={(e) => checkForm(e, postData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full "></span> : "Post"}</button>
+                <button type="submit" onClick={(e) => checkForm(e, postData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full "></span> : "Add Skill"}</button>
                 {errors.apiError && <p className="error">{errors.apiError}</p>}
               </div>   
-            </form>
-            <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
-            </form>                    
+            </form>                  
           </div>
         </div>
         <form method="dialog" className="modal-backdrop">

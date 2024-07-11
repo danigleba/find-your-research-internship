@@ -6,7 +6,7 @@ export async function POST(req) {
     try {
         const { data, error } = await supabaseAdmin
             .from("users")
-            .update({ name: profileData.name, position: profileData.position, department: profileData.department, institution: profileData.institution })
+            .update({ name: profileData.name, position: profileData.position, department: profileData.department, institution: profileData.institution, bio: profileData.bio, socials: [{twitter: profileData.twitter || null, linkedIn: profileData.linkedIn || null, googleScholar: profileData.googleScholar || null }] })
             .eq("id", user.id)
             .select()
         return NextResponse.json({ data: data })

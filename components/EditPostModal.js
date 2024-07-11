@@ -25,7 +25,7 @@ export default function EditPostModal({ user, item, getUserPosts }) {
             })
             const data = await response.json()
             if (data) {
-                await closePostModal()
+                closePostModal()
                 setLoading(false)
                 showSuccessToast()
                 getUserPosts()
@@ -59,7 +59,7 @@ export default function EditPostModal({ user, item, getUserPosts }) {
     }
 
     const closePostModal = async () => {
-        const closeButton = document.getElementById(`closeEditPostModal-${item.id}`)
+        const closeButton = document.getElementById(`closeEditPostModal-${item?.id}`)
         closeButton.click()
     }
     
@@ -77,7 +77,7 @@ export default function EditPostModal({ user, item, getUserPosts }) {
             <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#f9f9f9]">
                 <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer gap-6 p-0 rom-violet-600 to-indigo-600">
                     <div className={`${!user?.institution ? "invisible" : ""} tag bg-[#30313D] text-white truncate`}>{user?.institution}</div>
-                    <div className="tag whitespace-nowrap">Skill</div>
+                    <div className="tag whitespace-nowrap">STEM</div>
                 </div>
                 <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
                     <div className="space-y-6">
@@ -103,7 +103,7 @@ export default function EditPostModal({ user, item, getUserPosts }) {
                     </div>
                 </div>
                 <dialog id={`editPost-${item.id}`} className="modal">
-                    <div className="modal-box space-y-6">
+                    <div className="modal-box space-y-6 p-9">
                         <div className="space-y-3">
                             <div className="flex-box gap-3 justify-start">
                                 <div className="profile w-10 text-xs" style={{ backgroundImage: `url(${user?.profile_picture ? user?.profile_picture : "/profile.png"})` }}></div>
@@ -131,27 +131,27 @@ export default function EditPostModal({ user, item, getUserPosts }) {
                                     <button onClick={(e) => saveEditedPost(e)} className="flex-box gap-3 button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Save"}</button>
                                 </div>
                             </form>
-                            <form method="dialog">
-                                <button id={`closeEditPostModal-${item.id}`} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
-                            </form>
                         </div>
                     </div>
+                    <form method="dialog" className="modal-backdrop">
+                        <button id={`closeEditPostModal-${item?.id}`}>close</button>
+                    </form>  
                 </dialog>
                 <dialog id={`deletePost-${item.id}`} className="modal">
-                    <div className="modal-box space-y-6">
-                        <div className="modal-action">
+                    <div className="modal-box space-y-6 p-9">
+                        <div className="modal-action mt-0">
                             <form method="dialog" className="flex-box flex-col items-end w-full space-y-6" >
                                 <h2 className="text-center w-full">Are you sure you want to delete this?</h2>      
-                                <div className="flex-box justify-between w-full gap-12">
-                                    <button className="flex-box gap-3 button-delete w-full">Cancel</button>
-                                    <button onClick={(e) => deletePost(e)} className="flex-box gap-3 button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Yes"}</button>
+                                <div className="flex-box justify-between w-full gap-6">
+                                    <button className="button-delete w-full">Cancel</button>
+                                    <button onClick={(e) => deletePost(e)} className="flex-box button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box py-3"></span> : "Yes"}</button>
                                 </div>
-                            </form>
-                            <form method="dialog">
-                                <button id={`closeEditPostModal-${item.id}`} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
                             </form>
                         </div>
                     </div>
+                    <form method="dialog" className="modal-backdrop">
+                        <button id="closeNewPostModal">close</button>
+                    </form>  
                 </dialog>
                 {showToast == true && (
                     <Toast text="Post updated!" />                

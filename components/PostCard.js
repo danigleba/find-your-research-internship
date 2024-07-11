@@ -57,7 +57,7 @@ export default function PostCard({ user, item }) {
     }
 
     const openLoginModal = async () => {
-        document.getElementById("authModal").showModal()
+        document.getElementById("loginModal").showModal()
     }
 
     const closePostModal = async () => {
@@ -78,16 +78,27 @@ export default function PostCard({ user, item }) {
     useEffect(() => {
         if (item?.author) getPostAuthor()
     }, [item?.author])
+
+    useEffect(() => {
+        const handleCopy = (e) => {
+          e.preventDefault()
+        }
+    
+        document.addEventListener('copy', handleCopy)
+    
+        return () => {
+          document.removeEventListener('copy', handleCopy)
+        }
+      }, [])
     return (
-        <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-[#f9f9f9]">
+        <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-gray-100">
             <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer gap-6 p-0 rom-violet-600 to-indigo-600">
-                <div className={`${!author?.institution ? "invisible" : ""} tag bg-[#30313D] text-white truncate`}>{author?.institution}</div>
-                <div className="tag whitespace-nowrap">Skill</div>
+                <div className={`${!author?.institution ? "invisible" : ""} tag bg-white truncate`}>{author?.institution}</div>
             </div>
             <div className="flex-box flex-col justify-between items-start w-full h-full space-y-6">
                 <div className="space-y-6">
-                    <div className="space-y-3">
-                        <p className="font-bold text-2xl"><a className="font-black">I will do</a> {item?.title}</p>
+                    <div className="space-y-6">
+                        <p className="font-bold text-2xl"><a className="font-black"><a className="bg-[#30313D] text-gray-100 px-2">I will do</a></a> {item?.title}</p>
                         <div onClick={() => router.push(`/profile/${author?.id}`)} className="flex-box justify-start gap-3 cursor-pointer">
                             <div className="profile w-12" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div className="flex-box flex-col items-start w-5/6">
@@ -114,11 +125,11 @@ export default function PostCard({ user, item }) {
                     <p>{item?.description ? showFullDescription ? item?.description : `${item?.description?.slice(0, 75)}${item?.description?.length > 75 ? "..." : ""}` : "No description."}</p>
                     <a className={`${item?.description?.length <= 75 || !item?.description ? "hidden" : "link"}`} onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
                 </div>   
-                <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary flex-box gap-3 w-full"><FaHandsClapping />Collaborate</button>   
+                <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary hover:scale-105 active:scale-95 flex-box gap-3 w-full">Get in touch<IoSend /></button>   
             </div>
             <dialog id={`collabModal-${item.title}-${author?.name}`} className="modal">
                 <div className="modal-box space-y-6">
-                    <div className="space-y-3">
+                    <div className="space-y-3 p-3">
                         <div className="flex-box gap-3 justify-start">
                             <div className="profile w-10 text-xs" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div>

@@ -1,26 +1,15 @@
 "use client"
-import Head from "next/head"
 import { useRouter } from "next/navigation"
-import { useSearchParams } from "next/navigation"
+import Head from "next/head"
 import { useEffect, useState, Suspense} from "react"
 import Cookies from "js-cookie"
 import Header from "@/components/Header"
-import PostCard from "@/components/PostCard"
-import ProjectCard from "@/components/ProjectCard"
 import Footer from "@/components/Footer"
 import Hero from "@/components/Hero"
-import Pagination from "@/components/Pagination"
 
 export default function Home() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const section = searchParams.get("section") || "posts"
-  const [posts, setPosts] = useState([])
-  const [projects, setProjects] = useState([])
   const [user, setUser] = useState({})
-  const [search, setSearch] = useState("")
-  const page = searchParams.get("page") || 0
-  const [isSearchResult, setIsSearchResult] = useState(false)
 
   const getUserData = async () => {
     try {
@@ -32,86 +21,19 @@ export default function Home() {
         body: JSON.stringify({ id: Cookies.get("portiko-id")})
       })
       const data = await response.json()
-      if (data?.data?.[0]) setUser(data?.data?.[0])
+      if (data?.data?.[0]){
+        setUser(data?.data?.[0])
+        router.push("/account")
+      }
       else setUser(undefined)
     } catch (error) {
       console.error("Error fetching data:", error)
     } 
   }
 
-  const getPosts = async () => {
-    try {
-      const response = await fetch("/api/db/getPosts", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ page: page })
-      })
-      const data = await response.json({})
-      setPosts(data.data)
-    } catch (error) {
-        console.error("Error fetching data:", error)
-    }
-  }
-
-  const getProjects = async () => {
-    try {
-      const response = await fetch("/api/db/getProjects", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ page: page })
-      })
-      const data = await response.json({})
-      setProjects(data.data)
-    } catch (error) {
-        console.error("Error fetching data:", error)
-    }
-  }
-
-  const getSearchedPosts = async () => {
-    try {
-      const response = await fetch("/api/db/getSearchedPosts", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ search: search })
-      })
-      const data = await response.json({})
-      setPosts(data.data)
-    } catch (error) {
-        console.error("Error fetching data:", error)
-    }
-  }
-
-  const searchCollaborations = async (e) => {  
-    e.preventDefault()
-    if (search) {
-      getSearchedPosts()
-      setIsSearchResult(true)
-    }
-    if (search == "") {
-      getPosts()
-      setIsSearchResult(false)
-    }
-  }
-
-  useEffect(() => {
-    getPosts()
-    getProjects()
-  }, [])
-
   useEffect(() => {
     getUserData()
   }, [Cookies])
-
-  useEffect(() => {
-    if (section == "posts") getPosts()
-    else getProjects()
-  }, [page])
   return (
     <>
       <Head>
@@ -135,61 +57,9 @@ export default function Home() {
           <div className="mx-6 md:mx-24 space-y-12 pb-12">
             <Header user={user} />
             <div className="space-y-6">
-              {!user && (
-                <Hero />
-              )}
-              <div id="content" className="space-y-6">
-                {/*Search Bar*/}
-                <div className="flex-box flex-col justify-center w-full space-y-3 py-6"> 
-                  <h2>I need collaborators with expertise in</h2>
-                  <form onSubmit={(e) => searchCollaborations(e)} className="flex-box justify-between gap-6 w-full md:w-2/3 border border-[#dee1e7] shadow-sm rounded-full pl-6 pr-1 placeholder:text-[#30313D] w-2/3">
-                    <input value={search} onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search..." className="no-ring w-full py-3 placeholder:text-[#dee1e7] focus:outline-none focus:ring-0" />
-                    <button type="submit" className="button-primary flex-box gap-2 py-2 rounded-full shadow">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="#dee1e7" className="size-5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                      </svg>
-                      <p>Search</p>
-                    </button>
-                  </form>
-                  <div className="flex-box gap-6">
-                    <button onClick={() => router.push(`/?section=posts${!user ? "#content" : ""}`)} className={`${section == "posts" ? "bg-[#30313D] text-white" : "text-[#30313D]"} tag-lg`}>Skills</button>
-                    <button onClick={() => router.push(`/?section=projects${!user ? "#content" : ""}`)} className={`${section == "projects" ? "bg-[#30313D] text-white" : "text-[#30313D]"} tag-lg`}>Projects</button>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
-                  {/*Skeleton*/}
-                  {posts?.length == 0 && (
-                    Array.from({ length: 6 }).map((_, index) => (
-                      <div key={index} className="flex flex-col gap-4 w-full pb-12">
-                        <div className="skeleton h-40 w-full"></div>
-                        <div className="skeleton h-4 w-28"></div>
-                        <div className="skeleton h-4 w-full"></div>
-                      <div className="skeleton h-4 w-full"></div>
-                      </div>
-                    ))
-                  )}
-                  {section == "posts" && (
-                    <>
-                      {posts?.map((item, index) => (
-                        <PostCard key={index} user={user} item={item} /> 
-                      ))}
-                    </>
-                  )}
-                  {section == "projects" && (
-                    <>
-                      {projects?.map((item, index) => (
-                        <ProjectCard key={index} user={user} item={item} />
-                      ))}
-                    </>
-                  )}
-                </div>
-              </div>
+             <Hero />
             </div>
           </div>
-          {isSearchResult == false && section != "projects" && (
-            <Pagination page={page} user={user}/>
-          )}
           <Footer />
         </main>
       </Suspense>

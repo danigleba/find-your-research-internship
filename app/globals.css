@@ -8,43 +8,55 @@
   }
 
   h1 {
-    @apply font-bold text-base text-4xl; 
+    @apply font-black text-base text-4xl md:text-6xl; 
   }
 
   h2 {
-    @apply font-bold text-base md:text-xl; 
+    @apply font-bold text-lg md:text-xl; 
   }
 
   .subtitle {
-    @apply w-full md:w-1/2 text-base;
+    @apply w-full text-xl font-semibold text-gray-500;
   }
 
   label {
     @apply text-sm font-medium;
   }
 
+  .main-cta {
+    @apply bg-[#e07a5f] shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] rounded-full text-white font-medium hover:scale-105 active:scale-95 transition px-12 py-3;
+  }
+
   .button-primary {
-    @apply bg-[#4040e6] border border-[#4040e6] text-white font-medium active:scale-95 transition;
+    @apply bg-[#e07a5f] rounded-lg text-sm text-white font-medium active:scale-95 transition px-12 py-3;
   }
 
   .button-secondary {
-    @apply border border-[#30313D] text-[#30313D] font-medium hover:bg-[#30313D] hover:text-white transition;
+    @apply border border-[#30313D] text-[#30313D] rounded-xl font-medium hover:bg-[#30313D] hover:text-white transition;
   }
 
   .button-tertiary {
-    @apply border border-[#4040e6] text-[#4040e6] font-medium hover:bg-[#4040e6] hover:text-white transition;
+    @apply border border-[#30313D] text-[#30313D] font-medium hover:bg-[#30313D] hover:text-white transition;
   }
 
   .button-delete {
-    @apply border border-[#ef233c] text-[#ef233c] font-medium hover:bg-[#ef233c] hover:text-white transition;
+    @apply border border-[#ef233c] text-[#ef233c] rounded-xl font-medium hover:bg-[#ef233c] hover:text-white transition;
   }
 
+  .button-appHeader {
+    @apply text-xs text-sm font-medium px-3 md:px-6 py-2 md:py-3 rounded-full flex-box gap-3;
+  }
+  
   .link {
-    @apply text-[#4040e6] font-medium cursor-pointer no-underline;
+    @apply text-[#30313D] font-medium cursor-pointer no-underline;
   }
 
   .error {
     @apply text-red-400 text-sm font-light; 
+  }
+
+  .testimonial {
+    @apply flex-col border border-gray-200 rounded-lg shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] p-6 space-y-6 text-left w-full;
   }
 
   .profile {

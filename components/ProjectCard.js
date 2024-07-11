@@ -56,7 +56,7 @@ export default function ProjectCard({ user, item }) {
     }
 
     const openLoginModal = async () => {
-        document.getElementById("authModal").showModal()
+        document.getElementById("loginModal").showModal()
     }
 
     const closePostModal = async () => {
@@ -105,7 +105,7 @@ export default function ProjectCard({ user, item }) {
             </div>
             <dialog id={`collabModal-${item.title}-${author?.name}`} className="modal text-[#30313D]">
                 <div className="modal-box space-y-6">
-                    <div className="space-y-3">
+                    <div className="space-y-3 p-3">
                         <div className="flex-box gap-3 justify-start">
                             <div className="profile w-10 text-xs" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div>

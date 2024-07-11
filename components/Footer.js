@@ -4,7 +4,7 @@ const rubik = Rubik({ subsets: ["latin"] })
 
 export default function Footer() {
     return (
-        <main className="bg-[#f9f9f9] border-t border-[#dee1e7] h-full w-full md:px-12 pb-16 pt-3 mt-24">
+        <main className="bg-gray-100 border-t border-gray-200 h-full w-full md:px-12 pb-16 pt-3 mt-24">
             <div className="grid md:grid-cols-2 grid-cols-1 gap-12 mx-8 md:mx-20 mt-12">
                 {/*Company summary*/}
                 <div className="flex flex-col items-center md:items-start justify-center">

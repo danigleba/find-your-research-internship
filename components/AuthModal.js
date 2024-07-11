@@ -1,16 +1,16 @@
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import Cookies from "js-cookie"
 import Toast from "@/components/Toast"
+import { FcGoogle } from "react-icons/fc"
 
 export default function AuthModal({ baseAuthOption }) {
-  const [authOption, setAuthOption] = useState("Login")
+  const router = useRouter()
+  const [authOption, setAuthOption] = useState("Signup")
   const [signupData, setSignupData] = useState({
     email: "",
     password: "",
     name: "",
-    position: "",
-    department: "",
-    institution: "",
   })
   const [loginData, setLoginData] = useState({
     email: "",
@@ -63,7 +63,7 @@ export default function AuthModal({ baseAuthOption }) {
     const data = await response.json()
     if (data?.data?.user?.id) {
         await Cookies.set("portiko-id", data?.data?.user?.id, {expires: 30})
-        window.location.reload()
+        router.push("/account")
     }
     else {
         setLoading(false)
@@ -136,7 +136,7 @@ export default function AuthModal({ baseAuthOption }) {
   const openLoginModal = async () => {
     closeForgotPasswordModal()
     setAuthOption("Login")
-    document.getElementById("authModal").showModal()
+    document.getElementById("loginModal").showModal()
   }
 
 
@@ -157,7 +157,7 @@ export default function AuthModal({ baseAuthOption }) {
 
   const openSignupModal = async () => {
       setAuthOption("Signup")
-      document.getElementById("authModal").showModal()
+      document.getElementById("loginModal").showModal()
   }
 
   const showSuccessToast = async () => {
@@ -173,89 +173,72 @@ export default function AuthModal({ baseAuthOption }) {
   useEffect(() => {
     setAuthOption(baseAuthOption)
   }, [baseAuthOption])
+
+  useEffect(() => {
+    console.log(errors)
+  }, [errors])
   return (
     <>
-      <dialog id="authModal" className="modal">
+      <dialog id="loginModal" className="modal">
         <div className="modal-box space-y-12">
-          <div>
-            <p className="font-extrabold text-2xl text-center">{authOption == "Login" ?  "Log in" : authOption == "Signup" ? "Sign up" : "Reset Password"}</p>
-            {authOption == "Signup" && (
-              <div className="modal-action">
-                <form method="dialog" className="flex-box flex-col items-end w-full space-y-6" >
-                  <div className="w-full space-y-3">
-                    <div className="form-section">
-                      <label htmlFor="email">Email</label>
-                      <input value={signupData.email} onChange={(e) => handleChange(e, signupData)} type="email" id="email" name="email" placeholder="isaac@example.com" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                      {errors.email && <p className="error">{errors.email}</p>}
-                    </div>
-                    <div className="form-section">
-                      <label htmlFor="password">Password</label>
-                      <input value={signupData.password} onChange={(e) => handleChange(e, signupData)} type="password" id="password" name="password" placeholder="*******" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                      {errors.password && <p className="error">{errors.password}</p>}
-                    </div>
-                    <div className="flex-box items-start gap-6">
-                      <div className="form-section">
-                        <label htmlFor="name">Name</label>
-                        <input value={signupData.name} onChange={(e) => handleChange(e, signupData)} type="text" id="name" name="name" placeholder="Isaac Newton" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                        {errors.name && <p className="error">{errors.name}</p>}
-                      </div>
-                      <div className="form-section">
-                        <label htmlFor="position">Position</label>
-                        <input value={signupData.position} onChange={(e) => handleChange(e, signupData)} type="text" id="position" name="position" placeholder="Researcher" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                        {errors.position && <p className="error">{errors.position}</p>}
-                      </div>
-                    </div>
-                    <div className="flex-box items-start gap-6">
-                      <div className="form-section">
-                        <label htmlFor="department">Department</label>
-                        <input value={signupData.department} onChange={(e) => handleChange(e, signupData)} type="text" id="department" name="department" placeholder="Physics" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                        {errors.department && <p className="error">{errors.department}</p>}
-                      </div>
-                      <div className="form-section">
-                        <label htmlFor="institution">Institution</label>
-                        <input value={signupData.institution} onChange={(e) => handleChange(e, signupData)} type="text" id="institution" name="institution" placeholder="Cambridge" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                        {errors.institution && <p className="error">{errors.institution}</p>}
-                      </div>
-                    </div>
+          <div className="p-3">
+            <p className="font-extrabold text-2xl text-center">Log in</p>
+            <div className="modal-action">
+              <form onSubmit={(e) => login(e)} method="dialog" className="flex-box flex-col items-end w-full space-y-6" >
+                <div className="w-full space-y-3">
+                  <div className="form-section">
+                    <label>Email</label>
+                    <input value={loginData.email} onChange={(e) => handleChange(e, loginData)} id="email" name="email" type="email" placeholder="example@email.com" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                    {errors.email && <p className="error">{errors.email}</p>}
                   </div>
-                  <div className="flex-box flex-col items-center space-y-3 w-full">
-                    <button type="submit" onClick={(e) => checkForm(e, signupData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full " ></span> : "Sign up"}</button>
-                    {errors.apiError && <p className="error">{errors.apiError}</p>}
-                    <p className="text-xs text-center">By signing up, you agree to our <a href="/privacy-policy" className="underline">privacy policy</a> and <a href="/terms-of-service" className="underline">terms of service</a>.</p>
-                    <p>Already have an account? <a onClick={() => openLoginModal()} className="link">Log in</a></p>
+                  <div className="form-section">
+                    <label className="flex-box justify-between">Password</label>
+                    <input value={loginData.password} onChange={(e) => handleChange(e, loginData)} type="password" id="password" name="password" placeholder="*******" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                    {errors.password && <p className="error">{errors.password}</p>}
                   </div>
-                </form>
-                <form method="dialog">
-                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
-                </form>
-              </div>
-            )}
-            {authOption == "Login" && (
-              <div className="modal-action">
-                <form onSubmit={(e) => login(e)} method="dialog" className="flex-box flex-col items-end w-full space-y-6" >
-                  <div className="w-full space-y-3">
-                    <div className="form-section">
-                      <label>Email</label>
-                      <input value={loginData.email} onChange={(e) => handleChange(e, loginData)} id="email" name="email" type="email" placeholder="example@email.com" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                      {errors.email && <p className="error">{errors.email}</p>}
-                    </div>
-                    <div className="form-section">
-                      <label className="flex-box justify-between">Password <a onClick={(e) => openForgotPasswordModal(e)} className="link px-0 py-0">Forgot Password?</a></label>
-                      <input value={loginData.password} onChange={(e) => handleChange(e, loginData)} type="password" id="password" name="password" placeholder="*******" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                      {errors.password && <p className="error">{errors.password}</p>}
-                    </div>
+                </div>
+                <div className="flex-box flex-col items-center space-y-3 w-full">
+                  <button type="submit" onClick={(e) => checkForm(e, loginData)} className="button-primary w-full">{loading ? <span className="flex-box h-full loading loading-spinner pb-0 loading-xs flex-box h-full "></span> : "Log in"}</button>
+                  {errors.apiError && <p className="error">{errors.apiError}</p>}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button id="closeLoginModal">close</button>
+        </form>
+      </dialog>
+      <dialog id="signupModal" className="modal">
+        <div className="modal-box space-y-12">
+          <div className="p-3">
+            <p className="font-extrabold text-2xl text-center">Create an account</p>
+            <div className="modal-action">
+              <form method="dialog" className="flex-box flex-col items-end w-full space-y-6" >
+                <div className="w-full space-y-3">
+                  <div className="form-section">
+                      <label htmlFor="name">Name</label>
+                      <input value={signupData.name} onChange={(e) => handleChange(e, signupData)} type="text" id="name" name="name" placeholder="Isaac Newton" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                      {errors.name && <p className="error">{errors.name}</p>}
                   </div>
-                  <div className="flex-box flex-col items-center space-y-3 w-full">
-                    <button type="submit" onClick={(e) => checkForm(e, loginData)} className="button-primary w-full">{loading ? <span className="flex-box h-full loading loading-spinner pb-0 loading-xs flex-box h-full "></span> : "Log in"}</button>
-                    {errors.apiError && <p className="error">{errors.apiError}</p>}
-                    <p>Don't have an account yet? <a onClick={() => openSignupModal()} className="link">Sign up</a></p>
+                  <div className="form-section">
+                    <label htmlFor="email">Email</label>
+                    <input value={signupData.email} onChange={(e) => handleChange(e, signupData)} type="email" id="email" name="email" placeholder="isaac@example.com" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                    {errors.email && <p className="error">{errors.email}</p>}
                   </div>
-                </form>
-                <form method="dialog">
-                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-[#dee1e7]">✕</button>
-                </form>
-              </div>
-            )}
+                  <div className="form-section">
+                    <label htmlFor="password">Password</label>
+                    <input value={signupData.password} onChange={(e) => handleChange(e, signupData)} type="password" id="password" name="password" placeholder="*******" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                    {errors.password && <p className="error">{errors.password}</p>}
+                  </div>
+                </div>
+                <div className="flex-box flex-col items-center space-y-3 w-full">
+                  <button type="submit" onClick={(e) => checkForm(e, signupData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full " ></span> : "Sign up"}</button>
+                  {errors.apiError && <p className="error">{errors.apiError}</p>}
+                </div>
+                <p className="text-xs text-center w-full">By signing up, you agree to our <a href="/privacy-policy" className="underline">privacy policy</a> and <a href="/terms-of-service" className="underline">terms of service</a>.</p>
+              </form>
+            </div>
           </div>
         </div>
         <form method="dialog" className="modal-backdrop">
