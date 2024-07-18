@@ -236,6 +236,10 @@ export default function Home() {
                                     </div>
                                 </div>
                                 <div className="form-section">
+                                    <label htmlFor="position">Orcid <a className="font-light">(optional)</a></label>
+                                    <input value={profileData?.orcid} onChange={(e) => setProfileData(prevState => ({...prevState, orcid: e.target.value}))} type="text" id="orcid" name="orcid" placeholder="0000-0000-0000-0000" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                                </div> 
+                                <div className="form-section">
                                     <label htmlFor="position">Twitter</label>
                                     <input value={profileData?.twitter} onChange={(e) => setProfileData(prevState => ({...prevState, twitter: e.target.value}))} type="text" id="twitter" name="twitter" placeholder="twitter.com/yourname" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
                                 </div>

@@ -155,7 +155,7 @@ export default function Home() {
                   </form>
                   <div className="flex-box gap-6">
                     <button onClick={() => router.push(`explore/?section=posts${!user ? "#content" : ""}`)} className={`${section == "posts" ? "bg-[#30313D] text-white" : "text-[#30313D]"} tag-lg`}>👨🏾‍🔬 Researchers</button>
-                    <button onClick={() => router.push(`explore/?section=projects${!user ? "#content" : ""}`)} className={`${section == "projects" ? "bg-[#30313D] text-white" : "text-[#30313D]"} tag-lg`}>🏬 Labs</button>
+                    <button onClick={() => router.push(`explore/?section=projects${!user ? "#content" : ""}`)} className={`${section == "projects" ? "bg-[#30313D] text-white" : "text-[#30313D]"} tag-lg`}>🏬 Projects</button>
                   </div>
                 </div>
                 
