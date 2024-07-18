@@ -192,7 +192,7 @@ export default function AuthModal({ baseAuthOption }) {
                     {errors.email && <p className="error">{errors.email}</p>}
                   </div>
                   <div className="form-section">
-                    <label className="flex-box justify-between">Password</label>
+                    <label className="flex-box justify-between">Password <a onClick={() => {closeLoginModal(); document.getElementById("forgotPasswordModal").showModal()}} className="link text-[#e07a5f]">Forgot Password?</a></label>
                     <input value={loginData.password} onChange={(e) => handleChange(e, loginData)} type="password" id="password" name="password" placeholder="*******" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
                     {errors.password && <p className="error">{errors.password}</p>}
                   </div>
