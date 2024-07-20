@@ -63,7 +63,7 @@ export default function AuthModal({ baseAuthOption }) {
     const data = await response.json()
     if (data?.data?.user?.id) {
         await Cookies.set("portiko-id", data?.data?.user?.id, {expires: 30})
-        router.push("/account")
+        router.push("/onboarding")
     }
     else {
         setLoading(false)

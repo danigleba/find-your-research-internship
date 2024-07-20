@@ -4,22 +4,23 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState, Suspense } from "react"
 import Cookies from "js-cookie"
 import AppHeader from "@/components/AppHeader"
-import EditPostModal from "@/components/EditPostModal"
 import Toast from "@/components/Toast"
-import { FaXTwitter } from "react-icons/fa6"
-import { FaLinkedin } from "react-icons/fa"
-import { FaGoogleScholar } from "react-icons/fa6"
-import NewPostModal from "@/components/NewPostModal"
-import PostCard from "@/components/PostCard"
+import MiniPostCard from "@/components/MiniPostCard"
+
 
 export default function Home() {
     const router = useRouter()
     const [posts, setPosts] = useState([])
-    const [projects, setProjects] = useState([])
+    const [postData, setPostData] = useState({
+        title: "",
+        description: "",
+        categories: "STEM",
+    })
     const [user, setUser] = useState({})
     const [loading, setLoading] = useState(false)
     const [profileData, setProfileData] = useState({})
     const [showToast, setShowToast] = useState(false)
+    const [errors, setErrors] = useState({})
 
     const getUserData = async () => {
         try {
@@ -34,7 +35,7 @@ export default function Home() {
         if (data?.data?.[0]) setUser(data?.data?.[0])
         else router.push("/")
         } catch (error) {
-        console.error("Error fetching data:", error)
+            console.error("Error fetching data:", error)
         } 
     }
 
@@ -54,41 +55,80 @@ export default function Home() {
         } 
     }
 
-    const getUserPosts = async () => {
+   const getUserPosts = async () => {
         try {
         const response = await fetch("/api/db/getUserPosts", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
             },
-            body: JSON.stringify({ id: user?.id})
+            body: JSON.stringify({ id: user?.id })
         })
         const data = await response.json()
-        if (data?.data?.[0]) setPosts(data?.data)
+        console.log(data)
+        if (data?.data) setPosts(data?.data)
         else setPosts([])
         } catch (error) {
         console.error("Error fetching data:", error)
         } 
     }
 
-    const openNewPostModal = async (e) => {
+    const handleChange = async (e, form) => {
         e.preventDefault()
-        document.getElementById("newPostModal").showModal()
+        const { name, value } = e.target
+        setPostData({ ...form, [name]: value })
+      }
+    
+      const checkForm = async (e, form) => {
+        e.preventDefault()
+        setLoading(true)
+        const newErrors = {}
+        newErrors.apiError == null
+    
+        for (const item in form) {
+          if (form[item] === "") {
+              newErrors[item] = `${item} is required`
+          }
+        }
+        console.log(newErrors)
+        setErrors(newErrors)
+        if (Object.values(form).every(value => value !== "")) {
+          uploadNewPost()
+        }
+        else setLoading(false)
+      }
+    
+      const uploadNewPost = async () => {
+        try {
+        const response = await fetch("/api/db/uploadNewPost", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user: user, postData: postData })
+        })
+        const data = await response.json()
+        await router.refresh()
+        closeNewPostModal()
+        setPostData({title: "", description: "", category: "STEM"})
+        getUserPosts()
+        setPostData(prevState => ({...prevState }))
+        setLoading(false)
+        } catch (error) {
+          console.error("Error fetching data:", error)
+          setErrors(prevState => ({ ...prevState, apiError: "An unexpected error occurred. Please try again." }))
+          setLoading(false)
+        }  
     }
 
-    const closeEditProfilePostModal = async () => {
-        const closeButton = document.getElementById(`closeEditProfile`)
+    const closeNewPostModal = async () => {
+        const closeButton = document.getElementById("closeOnboardingNewPostModal")
         closeButton.click()
     }
 
-    const showSuccessToast = async () => {
-        setShowToast(true)
-        
-        const timeout = setTimeout(() => {
-          setShowToast(false)
-        }, 5000)
-        
-        return () => clearTimeout(timeout)
+    const openNewPostModal = async (e) => {
+        e.preventDefault()
+        document.getElementById("onboardingNewPostModal").showModal()
     }
 
     useEffect(() => {
@@ -97,9 +137,8 @@ export default function Home() {
     }, [Cookies])
 
     useEffect(() => {
-        if (user?.email) {
-            getUserPosts()
-        }
+        if (user?.email) getUserPosts()
+
         setProfileData(user)
     }, [user])
 
@@ -128,14 +167,14 @@ export default function Home() {
             <main className="mt-6 md:mt-12 text-[#30313D] overflow-hidden">
                 <AppHeader user={user} />
                 <div className="w-full px-6 md:px-24 space-y-6 pb-12">
-                    <div className="space-y-6 md:w-1/2">
-                        <div className="p-3 space-y-6">
-                            <div className="space-y-1">
-                                <h2 className="text-3xl font-extrabold">Onboarding</h2>
-                                <p>Fill this info for other researchers to know you better.</p>
+                    <div className="space-y-6">
+                        <form className="p-3 space-y-6">
+                            <div className="space-y-1 md:w-1/2">
+                                <h2 className="text-3xl font-extrabold">Tell us about yourself</h2>
+                                <p>The more other researchers know about you, the easier it will be to find collaborations.</p>
                             </div>
-                            <form className="flex-box justify-start items-start flex-col space-y-6" >  
-                                <div className="flex-box items-start gap-6 w-full">
+                            <div className="flex-box justify-start items-start flex-col space-y-6" >  
+                                <div className="flex-box items-start gap-6 w-full md:w-1/2">
                                     <div className="form-section">
                                         <label htmlFor="position">Position</label>
                                         <input value={profileData?.position} onChange={(e) => setProfileData(prevState => ({...prevState, position: e.target.value}))} type="text" id="position" name="position" placeholder="Researcher" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
@@ -144,37 +183,63 @@ export default function Home() {
                                         <label htmlFor="institution">Institution</label>
                                         <input value={profileData?.institution} onChange={(e) => setProfileData(prevState => ({...prevState, institution: e.target.value}))} type="text" id="institution" name="institution" placeholder="Cambridge" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
                                     </div>
-                                </div>
-                                <div className="form-section">
-                                    <label htmlFor="position">Orcid <a className="font-light">(optional)</a></label>
-                                    <input value={profileData?.orcid} onChange={(e) => setProfileData(prevState => ({...prevState, orcid: e.target.value}))} type="text" id="orcid" name="orcid" placeholder="0000-0000-0000-0000" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
-                                </div>  
-                                <div className="space-y-1">
+                                </div> 
+                                <div className="space-y-1 md:w-1/2">
                                     <h2>Your Skills</h2>
                                     <p>Please add any experiment, technique, or skill you have experience with. </p>
                                 </div>
-                                <div className={`${posts?.length == 0 ? "hidden" : ""} grid grid-cols-1 md:grid-cols-3 gap-6`}>
+                                <div className={`${posts?.length == 0 ? "hidden" : ""} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-6`}>
                                     {posts?.map((item, index) => (
-                                        <PostCard key={index} user={user} item={item} getUserPosts={getUserPosts}/> 
+                                        <MiniPostCard key={index} user={user} item={item} getUserPosts={getUserPosts}/> 
                                     ))}
                                 </div>
-                                <button onClick={(e) => openNewPostModal(e)} className="flex-box py-3 font-medium w-full border border-gray-200 hover:bg-gray-200 transition rounded-lg">
+                                <button onClick={(e) => openNewPostModal(e)} className="flex-box md:w-1/2 py-3 font-medium w-full border border-gray-200 hover:bg-gray-200 transition rounded-lg">
                                     + Add Skill
                                 </button>    
-                                <div className="w-full pt-6 text-center">
-                                    <button onClick={(e) => updateProfile(e)} className="flex-box gap-3 button-primary w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box"></span> : "Continue"}</button>
-                                    <a className="link">Skip</a>
+                                <div className="form-section md:w-1/2">
+                                    <label htmlFor="position">Orcid <a className="font-light">(optional)</a></label>
+                                    <input value={profileData?.orcid} onChange={(e) => setProfileData(prevState => ({...prevState, orcid: e.target.value}))} type="text" id="orcid" name="orcid" placeholder="0000-0000-0000-0000" className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                                </div> 
+                                <div className="pt-6 w-full md:w-1/2">
+                                    <button onClick={(e) => {e.preventDefault(); router.push("/explore")}} className="flex-box gap-3 button-primary hover:scale-105 w-full">{loading ? <span className="flex-box loading loading-spinner loading-xs flex-box"></span> : "Continue"}</button>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </main>
+            <dialog id="onboardingNewPostModal" className="modal">
+                <div className="modal-box space-y-6">
+                <div className="modal-action mt-0 p-3">
+                    <form method="dialog" className="flex-box flex-col items-center w-full space-y-6" >
+                    <p className="font-extrabold text-2xl text-center">New Skill</p>
+                    <div className="w-full space-y-6">
+                        <div className="form-section">
+                        <label htmlFor="Title">Name of the experiment or technique you do</label>
+                        <input value={postData?.title} onChange={(e) => handleChange(e, postData)} type="text" id="title" name="title" placeholder="Identification and characterization of microorganism " className="textarea textarea-bordered w-full focus:outline-none focus:ring-0"></input>
+                        {errors.title && <p className="error">{errors.title}</p>}
+                        </div>        
+                        <div className="form-section">
+                        <label htmlFor="Description">Description</label>
+                        <textarea value={postData?.description} onChange={(e) => handleChange(e, postData)} type="text" id="description" name="description" rows={3} className="textarea textarea-bordered w-full leading-6 focus:outline-none focus:ring-0" placeholder="Experiment the identification and characterization of microorganism using techniques like..."></textarea>
+                        {errors.description && <p className="error">{errors.description}</p>}
+                        </div>      
+                    </div>
+                    <div className="flex-box flex-col items-center space-y-3 w-full">
+                        <button type="submit" onClick={(e) => checkForm(e, postData)} className="button-primary w-full">{loading ? <span className="loading loading-spinner loading-xs flex-box h-full "></span> : "Add Skill"}</button>
+                        {errors.apiError && <p className="error">{errors.apiError}</p>}
+                    </div>   
+                    </form>                  
+                </div>
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                <button id="closeOnboardingNewPostModal">close</button>
+                </form>         
+            </dialog>
             {showToast == true && (
                 <Toast text="Profile updated!" />                
             )}
         </Suspense>
-        <NewPostModal user={user} getUserPosts={getUserPosts}/>
     </>
   )
 }
