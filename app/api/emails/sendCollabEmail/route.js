@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import supabase from "@/utils/supabase"
+import supabaseAdmin from "@/utils/supabaseAdmin"
 import collabTemplate from "@/components/emails/collabTemplate"
 import { Resend } from "resend"
 
@@ -8,7 +8,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export async function POST(req) {
     const { author, user, title, comment} = await req.json()
     try {
-        let { data: authorData, errorAuthor } = await supabase
+        let { data: authorData, errorAuthor } = await supabaseAdmin
             .from("users")
             .select("*")
             .eq("id", author.id)
