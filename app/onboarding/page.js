@@ -186,7 +186,7 @@ export default function Home() {
                                 </div> 
                                 <div className="space-y-1 md:w-1/2">
                                     <h2>Your Skills</h2>
-                                    <p>Please add any experiment, technique, or skill you have experience with. </p>
+                                    <p>Please add any experiment, technique, or skill you can do for other researchers.</p>
                                 </div>
                                 <div className={`${posts?.length == 0 ? "hidden" : ""} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-6`}>
                                     {posts?.map((item, index) => (
