@@ -133,15 +133,15 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="space-y-3">
-                        <div className={`${!user?.socials ? "hidden" : ""} flex-box gap-3 text-lg w-max`}>
-                            {user?.socials?.[0]?.twitter && (<a href={user?.socials?.[0]?.twitter} target="_blank"><FaXTwitter/></a>)}
-                            {user?.socials?.[0]?.linkedIn && (<a href={user?.socials?.[0]?.linkedIn} target="_blank"><FaLinkedin /></a>)}
-                            {user?.socials?.[0]?.googleScholar && (<a href={user?.socials?.[0]?.googleScholar} target="_blank"><FaGoogleScholar /></a>)}
+                        <div className={`${!researcher?.socials ? "hidden" : ""} flex-box gap-3 text-lg w-max`}>
+                            {researcher?.socials?.[0]?.twitter && (<a href={researcher?.socials?.[0]?.twitter} target="_blank"><FaXTwitter/></a>)}
+                            {researcher?.socials?.[0]?.linkedIn && (<a href={researcher?.socials?.[0]?.linkedIn} target="_blank"><FaLinkedin /></a>)}
+                            {researcher?.socials?.[0]?.googleScholar && (<a href={researcher?.socials?.[0]?.googleScholar} target="_blank"><FaGoogleScholar /></a>)}
                         </div>
                         <p>{researcher?.bio}</p>
                     </div>
                 </div>
-               <div className="space-y-6">
+                <div className="space-y-6">
                     <h2 className="text-2xl">Skills</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
                         {/*Skeleton*/}

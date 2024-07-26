@@ -2,7 +2,6 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import AuthModal from "./AuthModal"
 import Toast from "./Toast"
-import { FaHandsClapping } from "react-icons/fa6"
 import { IoSend } from "react-icons/io5"
 import { BsPatchCheckFill } from "react-icons/bs"
 
@@ -125,7 +124,7 @@ export default function PostCard({ user, item }) {
                     <p>{item?.description ? showFullDescription ? item?.description : `${item?.description?.slice(0, 75)}${item?.description?.length > 75 ? "..." : ""}` : "No description."}</p>
                     <a className={`${item?.description?.length <= 75 || !item?.description ? "hidden" : "link"}`} onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
                 </div>   
-                <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary hover:scale-105 active:scale-95 flex-box gap-3 w-full">Get in touch<IoSend /></button>   
+                <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary hover:scale-105 active:scale-95 flex-box gap-3 w-full">Send a Message<IoSend /></button>   
             </div>
             <dialog id={`collabModal-${item.title}-${author?.name}`} className="modal">
                 <div className="modal-box space-y-6">

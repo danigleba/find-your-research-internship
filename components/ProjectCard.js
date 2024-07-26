@@ -2,7 +2,6 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import AuthModal from "./AuthModal"
 import Toast from "./Toast"
-import { FaHandsClapping } from "react-icons/fa6"
 import { IoSend } from "react-icons/io5"
 
 export default function ProjectCard({ user, item }) {
@@ -99,9 +98,9 @@ export default function ProjectCard({ user, item }) {
                         </div>
                     </div>
                     <p>{item?.description ? showFullDescription ? item?.description : `${item?.description?.slice(0, 75)}${item?.description?.length > 75 ? "..." : ""}` : "No description."}</p>
-                    <a className={`${item?.description?.length <= 75 || !item?.description ? "hidden" : "link"}`} onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
+                    <a className={`${item?.description?.length <= 75 || !item?.description ? "hidden" : "link"} text-white`} onClick={() => setShowFullDescription(!showFullDescription)}>{showFullDescription ? "Show less" : "Show more"}</a>
                 </div>   
-                <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary flex-box gap-3 w-full"><FaHandsClapping />Collaborate</button>   
+                <button onClick={()=> user != undefined ? document.getElementById(`collabModal-${item.title}-${author.name}`).showModal() : openLoginModal()} className="button-primary flex-box gap-3 w-full">Send a Message<IoSend /></button>   
             </div>
             <dialog id={`collabModal-${item.title}-${author?.name}`} className="modal text-[#30313D]">
                 <div className="modal-box space-y-6">
