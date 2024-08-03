@@ -125,7 +125,7 @@ export default function Home() {
                     <div className="flex-box justify-start gap-3">
                         <div className="profile w-12" style={{ backgroundImage: `url(${researcher?.profile_picture ? researcher?.profile_picture : "/profile.png"})` }}></div>
                         <div className="flex-box flex-col items-start w-5/6">
-                            <div className="hidden md:flex tooltip tooltip-right pr-2 text-left" data-tip="Only Pro users can see researchers' names">
+                            <div className="hidden md:flex cursor-pointer tooltip tooltip-right pr-2 text-left">
                                 <p className="font-medium text-md cursor-default" style={{filter: "blur(2.75px)" }}>{researcher?.name}</p>
                             </div>
                             <p className="font-medium text-md cursor-default md:hidden" style={{filter: "blur(2.75px)" }}>{researcher?.name}</p>

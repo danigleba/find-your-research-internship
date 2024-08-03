@@ -102,7 +102,7 @@ export default function PostCard({ user, item }) {
                             <div className="profile w-12" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div className="flex-box flex-col items-start w-5/6">
                                 <div className="flex-box">
-                                    <div className="hidden md:flex tooltip tooltip-right pr-2 text-left" data-tip="Only Pro users can see researchers' names">
+                                    <div className="pr-2 text-left">
                                         <p className="font-medium text-md cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
                                     </div>
                                     {author?.verified == true && (
@@ -132,7 +132,7 @@ export default function PostCard({ user, item }) {
                         <div className="flex-box gap-3 justify-start">
                             <div className="profile w-10 text-xs" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div>
-                                <div className="hidden md:flex w-max tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
+                                <div className="hidden md:flex w-max pr-2">
                                     <p className="font-medium text-base font-medium cursor-default" style={{filter: "blur(2.75px)" }}>{author?.name}</p>
                                 </div>
                                 <p className="font-medium text-base font-medium cursor-default md:hidden" style={{filter: "blur(2.75px)" }}>{author?.name}</p>

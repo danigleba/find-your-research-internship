@@ -86,7 +86,7 @@ export default function EditPostModal({ user, item, getUserPosts }) {
                             <div onClick={() => router.push(`/profile/${user?.id}`)} className="flex-box justify-start gap-3 cursor-pointer">
                                 <div className="profile w-12" style={{ backgroundImage: `url(${user?.profile_picture ? user?.profile_picture : "/profile.png"})` }}></div>
                                 <div className="flex-box flex-col items-start w-5/6">
-                                    <div className="hidden md:flex tooltip tooltip-right pr-2 text-left" data-tip="Only Pro users can see researchers' names">
+                                    <div className="hidden md:flex pr-2 text-left">
                                         <p className="font-medium text-md cursor-default">{user?.name}</p>
                                     </div>
                                     <p className="font-medium text-md cursor-default md:hidden">{user?.name}</p>
@@ -108,7 +108,7 @@ export default function EditPostModal({ user, item, getUserPosts }) {
                             <div className="flex-box gap-3 justify-start">
                                 <div className="profile w-10 text-xs" style={{ backgroundImage: `url(${user?.profile_picture ? user?.profile_picture : "/profile.png"})` }}></div>
                                 <div>
-                                    <div className="hidden md:flex w-max tooltip tooltip-right pr-2" data-tip="Only Pro users can see researchers' names">
+                                    <div className="hidden md:flex w-max cursor-pointer tooltip tooltip-right pr-2">
                                         <p className="font-medium text-base font-medium cursor-default">{user?.name}</p>
                                     </div>
                                     <p className="font-medium text-base font-medium cursor-default md:hidden">{user?.name}</p>

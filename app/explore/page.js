@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { useEffect, useState, Suspense } from "react"
 import Cookies from "js-cookie"
 import AppHeader from "@/components/AppHeader"
+import NewProjectModal from "@/components/NewProjectModal"
 import Toast from "@/components/Toast"
 import PostCard from "@/components/PostCard"
 import ProjectCard from "@/components/ProjectCard"
@@ -157,8 +158,13 @@ export default function Home() {
                     <button onClick={() => router.push(`explore/?section=posts${!user ? "#content" : ""}`)} className={`${section == "posts" ? "bg-[#30313D] text-white" : "text-[#30313D]"} tag-lg`}>👨🏾‍🔬 Researchers</button>
                     <button onClick={() => router.push(`explore/?section=projects${!user ? "#content" : ""}`)} className={`${section == "projects" ? "bg-[#30313D] text-white" : "text-[#30313D]"} tag-lg`}>🏬 Projects</button>
                   </div>
-                </div>
-                
+                </div>   
+                {section == "projects" && (
+                  <div className="flex-box flex-col md:flex-row w-full bg-gray-800 py-3 px-6 text-white font-medium gap-3 md:gap-6">
+                    <p>Need help with your project?</p>
+                    <button onClick={() => document.getElementById("newProjectModal").showModal()} className="button-primary hover:scale-105">+ Add your project</button>
+                  </div>
+                )}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full px-6 md:px-24">
                   {/*Skeleton*/}
                   {posts?.length == 0 && (
@@ -195,6 +201,7 @@ export default function Home() {
                 <Toast text="Profile updated!" />                
             )}
         </Suspense>
+        <NewProjectModal user={user} getUserPosts={getPosts} getUserProjects={getProjects}/>
     </>
   )
 }

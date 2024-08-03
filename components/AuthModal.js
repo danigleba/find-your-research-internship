@@ -63,6 +63,7 @@ export default function AuthModal({ baseAuthOption }) {
     const data = await response.json()
     if (data?.data?.user?.id) {
         await Cookies.set("portiko-id", data?.data?.user?.id, {expires: 30})
+        await sendFeedbackRequestEmail()
         router.push("/onboarding")
     }
     else {
@@ -130,6 +131,21 @@ export default function AuthModal({ baseAuthOption }) {
       console.error("Error fetching data:", error)
       setLoading(false)
       setErrors(prevState => ({ ...prevState, apiError: "Error sending email. Please try again." }))
+    } 
+  }
+
+  const sendFeedbackRequestEmail = async () => {
+    try {
+      const response = await fetch("/api/emails/sendFeedbackRequestEmail", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user: signupData })
+      })
+      const data = await response.json()
+    } catch (error) {
+      console.error("Error fetching data:", error)
     } 
   }
 

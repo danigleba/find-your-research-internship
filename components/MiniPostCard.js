@@ -51,7 +51,7 @@ export default function MiniPostCard({ user, item }) {
                             <div className="profile w-12" style={{ backgroundImage: `url(${author?.profile_picture ? author?.profile_picture : "/profile.png"})` }}></div>
                             <div className="flex-box flex-col items-start w-5/6">
                                 <div className="flex-box">
-                                    <div className="hidden md:flex tooltip tooltip-right pr-2 text-left" data-tip="Only Pro users can see researchers' names">
+                                    <div className="hidden md:flex cursor-pointer tooltip tooltip-right pr-2 text-left">
                                         <p className="font-medium text-md cursor-default">{author?.name}</p>
                                     </div>
                                     {author?.verified == true && (

@@ -42,7 +42,7 @@ export default function Hero({ }) {
                 </div>
               </div>
               <div className="flex-box flex-col md:items-start gap-1">
-                <p className="font-base">Loved by over 500 academics</p>
+                <p className="font-base">Loved by over 600 academics</p>
               </div>
             </div>
           </div>
