@@ -6,6 +6,7 @@ import Cookies from "js-cookie"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import Hero from "@/components/Hero"
+import LandingSearch from "@/components/LandingSearch"
 
 export default function Home() {
   const router = useRouter()
@@ -60,6 +61,7 @@ export default function Home() {
              <Hero />
             </div>
           </div>
+          <LandingSearch />
           <Footer />
         </main>
       </Suspense>

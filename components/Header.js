@@ -29,24 +29,10 @@ export default function Header({ user, getUserPosts, getUserProjects }) {
   }
   return (
     <main className="flex items-center justify-between w-full">
-      <a href="/" className={`${rubik.className} text-[#30313D] text-xl md:text-2xl font-bold`}>Portiko</a>
+      <a href="/" className={`${rubik.className} text-[#30313D] text-xl md:text-2xl font-bold`}>👩‍🔬 Lab Intern</a>
       <div className="flex-box gap-6">
         <button onClick={() => openLoginModal()} className="button-secondary">Log in</button>
       </div>
-      {/*{!user && (
-        <div className="flex-box gap-6">
-          <button onClick={() => openLoginModal()} className="button-secondary">Log in</button>
-        </div>
-      )}
-      {user && (
-        <div className="flex-box gap-6 justify-start">
-          <button onClick={() => document.getElementById("newPostModal").showModal()} className="button-primary flex-box gap-2"><CiCirclePlus strokeWidth={1.2} size={20}/>Post</button>
-          <div onClick={() => router.push("/account")} className="flex-box gap-3 cursor-pointer">
-            <p className="hidden md:block font-semibold text-base">{user?.name}</p>
-            <div className="profile hidden md:flex" style={{ backgroundImage: `url(${user?.profile_picture ? user?.profile_picture : "/profile.png"})` }}></div>
-          </div>
-        </div>
-      )}*/}
       <AuthModal baseAuthOption={authOption}/>
       <NewPostModal user={user} getUserPosts={getUserPosts} getUserProjects={getUserProjects} />
     </main>

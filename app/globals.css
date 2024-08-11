@@ -8,7 +8,7 @@
   }
 
   h1 {
-    @apply font-black text-base text-4xl md:text-6xl; 
+    @apply font-black text-base text-4xl md:text-5xl; 
   }
 
   h2 {
@@ -16,7 +16,7 @@
   }
 
   .subtitle {
-    @apply w-full text-xl font-semibold text-gray-500;
+    @apply flex-box gap-6 items-center justify-center md:justify-start w-full text-lg font-medium text-gray-700;
   }
 
   label {
@@ -24,7 +24,7 @@
   }
 
   .main-cta {
-    @apply bg-[#e07a5f] shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] rounded-full text-white font-medium hover:scale-105 active:scale-95 transition px-12 py-3;
+    @apply border border-fuchsia-500 bg-fuchsia-100 text-fuchsia-500 rounded-lg font-medium hover:scale-105 active:scale-95 transition px-12 py-3;
   }
 
   .button-primary {
@@ -32,7 +32,7 @@
   }
 
   .button-secondary {
-    @apply border border-[#30313D] text-[#30313D] rounded-xl font-medium hover:bg-[#30313D] hover:text-white transition;
+    @apply border border-[#30313D] text-[#30313D] rounded-md font-medium hover:bg-[#30313D] hover:text-white transition py-1;
   }
 
   .button-tertiary {

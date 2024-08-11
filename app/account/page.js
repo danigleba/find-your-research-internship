@@ -56,7 +56,7 @@ export default function Home() {
 
     const getUserProjects = async () => {
         try {
-        const response = await fetch("/api/db/getUserProjects", {
+        const response = await fetch("/api/test/getFilteredUsers", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -64,6 +64,7 @@ export default function Home() {
             body: JSON.stringify({ id: user?.id})
         })
         const data = await response.json()
+        console.log(data)
         if (data?.data?.[0]) setProjects(data?.data)
         else setProjects([])
         } catch (error) {

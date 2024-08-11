@@ -20,7 +20,7 @@ export default function UsedBy() {
     }, [])
     return (
         <div className="space-y-12 w-full text-center">
-            <p className="font-medium">Used by researchers at</p>
+            <p className="font-medium">Used by undergrads at</p>
             <div className="overflow-hidden w-full">
                 <div ref={scrollContainerRef} className="flex space-x-6 md:space-x-24 animate-scroll">
                     {['/logos/harvard.png', '/logos/yale.png', '/logos/oxford.svg', '/logos/uab.png'].concat(
