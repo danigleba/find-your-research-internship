@@ -6,6 +6,7 @@ import Cookies from "js-cookie"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import Hero from "@/components/Hero"
+import CheckoutModal from "@/components/CheckOutModal"
 import FinalCTA from "@/components/FinalCta"
 import LandingSearch from "@/components/LandingSearch"
 
@@ -66,6 +67,7 @@ export default function Home() {
           </div>
           <Footer />
         </main>
+        <CheckoutModal />
       </Suspense>
     </>
   )

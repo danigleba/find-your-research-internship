@@ -31,7 +31,7 @@ export default function Header({ user, getUserPosts, getUserProjects }) {
     <main className="flex items-center justify-between w-full">
       <a href="/" className={`${rubik.className} text-[#30313D] text-xl md:text-2xl font-bold`}>👩‍🔬 Lab Intern</a>
       <div className="flex-box gap-6">
-        <button onClick={() => openLoginModal()} className="button-secondary">Log in</button>
+        <button className="button-secondary">Log in</button>
       </div>
       <AuthModal baseAuthOption={authOption}/>
       <NewPostModal user={user} getUserPosts={getUserPosts} getUserProjects={getUserProjects} />

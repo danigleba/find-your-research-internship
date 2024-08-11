@@ -9,7 +9,7 @@ export default function Hero({ }) {
     document.getElementById("signupModal").showModal()
   }
   return (
-    <div className="flex-box flex-col w-full text-center space-y-24 pb-12 px-6">
+    <div className="flex-box flex-col w-full text-center space-y-24 pb-12">
         <div className="flex-box flex-col md:flex-row gap-24">
           <div className="space-y-12 md:text-left">
             <div className="flex-box flex-col gap-6 md:gap-12 w-full">
@@ -18,7 +18,7 @@ export default function Hero({ }) {
                 <h1>Find your research internship <a className="px-1 text-white bg-[#30313D]">today</a></h1>
               </div>
               <div className="flex flex-col gap-3 w-full items-center justify-center md:items-start items-start text-center">
-                <div className="w-max space-y-1">
+                <div className="space-y-1">
                   <p className="subtitle"><a className="text-xl">🏫</a>Find 250+ researchers from top US schools </p>
                   <p className="subtitle"><a className="text-xl">🌀</a>Filter by school, state & department</p>
                   <p className="subtitle"><a className="text-xl">✉️</a>Message professors directly</p>
@@ -27,7 +27,7 @@ export default function Hero({ }) {
               </div>
             </div>
             <div className="flex-box flex-col items-center md:items-start gap-6">
-              <button onClick={() => openSignupModal()} className="main-cta">Find my internship</button>
+              <button onClick={() => document.getElementById("checkout").showModal()} className="main-cta">Find my internship</button>
               <div className="flex-box flex-col md:flex-row gap-3">
                 <div className="avatar-group -space-x-4 rtl:space-x-reverse">
                   <div className="avatar">

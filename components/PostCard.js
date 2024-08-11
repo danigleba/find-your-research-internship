@@ -1,9 +1,6 @@
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import AuthModal from "./AuthModal"
-import Toast from "./Toast"
-import { IoSend } from "react-icons/io5"
-import { BsPatchCheckFill } from "react-icons/bs"
+import { MdEmail } from "react-icons/md"
 
 export default function PostCard({}) {
     const router = useRouter()
@@ -45,19 +42,19 @@ export default function PostCard({}) {
         }
       }, [])
     return (
-        <main className="flex-box flex-col w-full items-start justify-between space-y-6">
+        <div onClick={() => document.getElementById("checkout").showModal()} className="flex-box flex-col w-full items-start justify-between space-y-6">
            <div className="flex items-end gap-3 bg-cover bg-center bg-[url('/example2.jpg')] rounded-lg w-full aspect-video bg-red-200 p-3">
               <div className="h-6 w-max px-3 rounded bg-white">Harvard</div>
-              <div className="h-6 w-max px-3 rounded bg-white">Math</div>
+              <div className="h-6 w-max px-3 rounded bg-white">Psychology</div>
             </div>
             <div className="flex-box justify-between w-full">
               <div>
-                <p className="text-lg font-bold">Name</p>
-                <p className="">Position at Institution</p>
+                <p className="text-lg font-bold">Steven Pinked</p>
+                <p className="">Professor at Harvard</p>
               </div>
-              <button className="main-cta border-none text-gray-700 whitespace-nowrap px-3">Message NAME</button>
+              <button className="flex-box gap-3 main-cta border-none text-gray-700 whitespace-nowrap px-3"><MdEmail />Email Steven</button>
             </div>
-        </main>
+        </div>
     )
 }
   
