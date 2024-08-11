@@ -9,10 +9,10 @@ export default function Footer() {
                 {/*Company summary*/}
                 <div className="flex flex-col items-center md:items-start justify-center">
                     <div className="flex items-center justify-center md:justify-start gap-2">
-                        <p className={`${rubik.className} text-[#30313D] text-2xl font-bold`}>Portiko</p>
+                        <p className={`${rubik.className} text-[#30313D] text-2xl font-bold`}>👩‍🔬 Lab Intern</p>
                     </div>
-                    <p className="text-sm pt-3 text-center md:text-left">Find scientific collaborations in seconds</p>
-                    <p className="text-sm text-center md:text-left">Portiko © 2024 All rights reserved</p>
+                    <p className="text-sm pt-3 text-center md:text-left">Find your research internship today</p>
+                    <p className="text-sm text-center md:text-left">Lab Intern © 2024 All rights reserved</p>
                 </div>
                 <div className="md:flex md:justify-end items-start space-y-12 md:space-y-0 gap-24 text-lg md:text-sm">
                     {/*Contact*/}
@@ -20,7 +20,7 @@ export default function Footer() {
                         <p className="font-semibold text-lg pb-2">Contact</p>
                         <div className="space-y-1">
                             <div>
-                                <a href="mailto:joinportiko@gmail.com" target="_blank" className="hover:underline px-12 md:px-0">joinportiko@gmail.com</a>
+                                <a href="mailto:daniglebapuig@gmail.com" target="_blank" className="hover:underline px-12 md:px-0">daniglebapuig@gmail.com</a>
                             </div> 
                         </div>
                     </div>
@@ -29,7 +29,7 @@ export default function Footer() {
                         <p className="font-semibold text-lg pb-2">Social</p>
                         <div className="space-y-1">
                             <div>
-                                <a href="https://x.com/Ana_BurgosRuiz/status/1793670564093260103" target="_blank" className="hover:underline px-12 md:px-0">X</a>
+                                <a href="https://x.com/danigleba" target="_blank" className="hover:underline px-12 md:px-0">X</a>
                             </div> 
                         </div>
                     </div>

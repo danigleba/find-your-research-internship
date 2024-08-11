@@ -6,6 +6,7 @@ import Cookies from "js-cookie"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import Hero from "@/components/Hero"
+import FinalCTA from "@/components/FinalCta"
 import LandingSearch from "@/components/LandingSearch"
 
 export default function Home() {
@@ -60,8 +61,9 @@ export default function Home() {
             <div className="space-y-6">
              <Hero />
             </div>
+            <LandingSearch />
+            <FinalCTA />
           </div>
-          <LandingSearch />
           <Footer />
         </main>
       </Suspense>

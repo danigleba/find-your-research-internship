@@ -9,19 +9,21 @@ export default function Hero({ }) {
     document.getElementById("signupModal").showModal()
   }
   return (
-    <div className="flex-box flex-col w-full text-center space-y-24 pb-12">
+    <div className="flex-box flex-col w-full text-center space-y-24 pb-12 px-6">
         <div className="flex-box flex-col md:flex-row gap-24">
           <div className="space-y-12 md:text-left">
             <div className="flex-box flex-col gap-6 md:gap-12 w-full">
-              <div className="space-y-6">
+              <div className="flex flex-col items-center md:items-start space-y-6">
                 <p className="bg-gradient-to-r from-violet-200 to-fuchsia-200 cursor-default px-6 py-1 rounded-full w-max text-sm font-medium">✨ and 10x your med school application ✨</p>
-                <h1 className="hidden md:block">Find your research internship <a className="px-1 text-white bg-[#30313D]">today</a></h1>
+                <h1>Find your research internship <a className="px-1 text-white bg-[#30313D]">today</a></h1>
               </div>
-              <h1 className="md:hidden">Find your next research collaboration</h1>
-              <div className="flex flex-col gap-3 w-full items-center text-center">
-                <p className="subtitle"><a className="text-xl">🏫</a>Find professors from top schools in the US</p>
-                <p className="subtitle"><a className="text-xl">✅</a>All profiles are verified</p>
-                <p className="subtitle"><a className="text-xl">✉️</a>All contacts include an email</p>
+              <div className="flex flex-col gap-3 w-full items-center justify-center md:items-start items-start text-center">
+                <div className="w-max space-y-1">
+                  <p className="subtitle"><a className="text-xl">🏫</a>Find 250+ researchers from top US schools </p>
+                  <p className="subtitle"><a className="text-xl">🌀</a>Filter by school, state & department</p>
+                  <p className="subtitle"><a className="text-xl">✉️</a>Message professors directly</p>
+                  <p className="subtitle"><a className="text-xl">⭐️</a>All data is manually verified</p>
+                </div>
               </div>
             </div>
             <div className="flex-box flex-col items-center md:items-start gap-6">

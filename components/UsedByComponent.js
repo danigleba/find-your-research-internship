@@ -19,14 +19,14 @@ export default function UsedBy() {
         requestAnimationFrame(scrollStep)
     }, [])
     return (
-        <div className="space-y-12 w-full text-center">
+        <div className="space-y-6 w-full text-center">
             <p className="font-medium">Used by undergrads at</p>
             <div className="overflow-hidden w-full">
                 <div ref={scrollContainerRef} className="flex space-x-6 md:space-x-24 animate-scroll">
                     {['/logos/harvard.png', '/logos/yale.png', '/logos/oxford.svg', '/logos/uab.png'].concat(
                         ['/logos/harvard.png', '/logos/yale.png', '/logos/oxford.svg', '/logos/uab.png']
                     ).map((logo, index) => (
-                        <div key={index} className="flex-shrink-0 h-8 md:h-12">
+                        <div key={index} className="flex-shrink-0 h-8 md:h-8">
                             <img src={logo} alt={`${logo} logo`} className="h-full w-auto" />
                         </div>
                     ))}
