@@ -5,7 +5,7 @@ export default function CheckoutModal() {
               <div className="space-y-8">
                 <div className="flex flex-col items-center space-y-3">
                   <p className="text-5xl font-extrabold">$5 <a className="text-sm text-gray-700 font-bold">USD</a></p>
-                  <p className="cursor-default border border-green-500 text-green-500 font-medium bg-green-100 px-12 py-1 rounded-full text-xs">Pay once, get Lab Intern for life</p>
+                  <p className="cursor-default border border-green-500 text-green-500 font-medium bg-green-100 px-12 py-1 rounded-full text-xs text-center whitespace-nowrap">Pay once, get Lab Intern for life</p>
                 </div>
                 <div className="flex flex-col gap-3 w-full items-center justify-center items-start text-center">
                   <div className="space-y-3">
@@ -16,7 +16,7 @@ export default function CheckoutModal() {
                   </div>
                 </div>
                 <div className="w-full space-y-3">
-                  <button className="main-cta w-full">Find my internship for $5</button>
+                  <button className="main-cta w-full">Find my internship</button>
                   <p className="w-full text-sm text-gray-600 text-center">Pay once, get Lab Intern for life</p>
                 </div>
               </div>
