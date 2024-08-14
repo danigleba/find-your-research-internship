@@ -22,7 +22,7 @@ export default function Hero({ }) {
                   <p className="subtitle"><a className="text-xl">🏫</a>Get 250+ researchers from top US schools </p>
                   <p className="subtitle"><a className="text-xl">🌀</a>Filter by school, state & department</p>
                   <p className="subtitle"><a className="text-xl">✉️</a>Message professors directly</p>
-                  <p className="subtitle"><a className="text-xl">⭐️</a>All data is manually verified</p>
+                  <p className="subtitle"><a className="text-xl">✅</a>All data is manually verified</p>
                 </div>
               </div>
             </div>

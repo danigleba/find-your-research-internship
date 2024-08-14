@@ -12,7 +12,7 @@ export default function CheckoutModal() {
                     <p className="subtitle text-base text-gray-600"><a className="text-lg">🏫</a>Get 250+ researchers from top US schools </p>
                     <p className="subtitle text-base text-gray-600"><a className="text-lg">🌀</a>Filter by school, state & department</p>
                     <p className="subtitle text-base text-gray-600"><a className="text-lg">✉️</a>Message professors directly</p>
-                    <p className="subtitle text-base text-gray-600"><a className="text-lg">⭐️</a>All data is manually verified</p>
+                    <p className="subtitle text-base text-gray-600"><a className="text-lg">✅</a>All data is manually verified</p>
                   </div>
                 </div>
                 <div className="w-full space-y-3">
