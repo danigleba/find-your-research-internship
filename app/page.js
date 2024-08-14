@@ -42,18 +42,18 @@ export default function Home() {
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Portiko | Find scientific collaborations in seconds"/>
-        <meta property="og:title" content="Portiko" />
-        <meta property="og:description" content="Portiko | Find scientific collaborations in seconds" />
+        <meta name="description" content="Lab Intern | Find your research internship today"/>
+        <meta property="og:title" content="Lab Intern" />
+        <meta property="og:description" content="Lab Intern | Find your research internship today" />
         <meta property="og:image" content="/icon.png" />
-        <meta property="og:url" content="joinportiko.com" />
+        <meta property="og:url" content="-" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Portiko" />
-        <meta name="twitter:description" content="Portiko | Find scientific collaborations in seconds" />
+        <meta name="twitter:title" content="Lab Intern" />
+        <meta name="twitter:description" content="Lab Intern | Find your research internship today" />
         <meta name="twitter:image" content="/icon.png" />
         <link rel="icon" href="/icon.png" />
-        <title>Portiko</title>
+        <title>Lab Intern</title>
       </Head>
       <Suspense fallback={<div>Loading...</div>}>
         <main className="mt-6 md:mt-12 text-[#30313D] overflow-hidden">

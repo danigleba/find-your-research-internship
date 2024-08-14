@@ -27,7 +27,7 @@ export default function MiniPostCard({ user, item }) {
         if (item?.author) getPostAuthor()
     }, [item?.author])
 
-    useEffect(() => {
+   /* useEffect(() => {
         const handleCopy = (e) => {
           e.preventDefault()
         }
@@ -37,7 +37,7 @@ export default function MiniPostCard({ user, item }) {
         return () => {
           document.removeEventListener('copy', handleCopy)
         }
-    }, [])
+    }, [])*/
     return (
         <main className="flex-box flex-col w-full items-start justify-between space-y-6 p-6 rounded-xl pb-6 bg-gray-100">
             <div className="flex-box items-end justify-between bg-cover w-full h-max rounded-lg cursor-pointer gap-6 p-0 rom-violet-600 to-indigo-600">

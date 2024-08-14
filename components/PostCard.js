@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { MdEmail } from "react-icons/md"
 
-export default function PostCard({}) {
+export default function PostCard({ name, position, institution, department, image }) {
     const router = useRouter()
     const [author, setAuthor] = useState({})
     const [showFullDescription, setShowFullDescription] = useState(false)
@@ -30,7 +30,7 @@ export default function PostCard({}) {
         return () => clearTimeout(timeout)
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         const handleCopy = (e) => {
           e.preventDefault()
         }
@@ -40,19 +40,19 @@ export default function PostCard({}) {
         return () => {
           document.removeEventListener('copy', handleCopy)
         }
-      }, [])
+      }, [])*/
     return (
         <div onClick={() => document.getElementById("checkout").showModal()} className="flex-box flex-col w-full items-start justify-between space-y-6">
-           <div className="flex items-end gap-3 bg-cover bg-center bg-[url('/example2.jpg')] rounded-lg w-full aspect-video bg-red-200 p-3">
-              <div className="h-6 w-max px-3 rounded bg-white">Harvard</div>
-              <div className="h-6 w-max px-3 rounded bg-white">Psychology</div>
+           <div className={`flex items-end gap-3 bg-cover bg-center rounded-lg w-full aspect-video bg-red-200 p-3`} style={{ backgroundImage: image ? image : "" }}>
+              <div className="tag">{institution}</div>
+              <div className="tag">{department}</div>
             </div>
             <div className="flex-box justify-between w-full">
               <div>
-                <p className="text-lg font-bold">Steven Pinked</p>
-                <p className="">Professor at Harvard</p>
+                <p className="text-lg font-bold">{name}</p>
+                <p className="">{position} at {institution}</p>
               </div>
-              <button className="flex-box gap-3 main-cta border-none text-gray-700 whitespace-nowrap px-3"><MdEmail />Email Steven</button>
+              <button className="flex-box gap-3 main-cta border-none text-gray-700 whitespace-nowrap px-3"><MdEmail />Email {name?.split(" ")[0]}</button>
             </div>
         </div>
     )

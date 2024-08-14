@@ -19,7 +19,7 @@ export default function Hero({ }) {
               </div>
               <div className="flex flex-col gap-3 w-full items-center justify-center md:items-start items-start text-center">
                 <div className="space-y-1">
-                  <p className="subtitle"><a className="text-xl">🏫</a>Find 250+ researchers from top US schools </p>
+                  <p className="subtitle"><a className="text-xl">🏫</a>Get 250+ researchers from top US schools </p>
                   <p className="subtitle"><a className="text-xl">🌀</a>Filter by school, state & department</p>
                   <p className="subtitle"><a className="text-xl">✉️</a>Message professors directly</p>
                   <p className="subtitle"><a className="text-xl">⭐️</a>All data is manually verified</p>

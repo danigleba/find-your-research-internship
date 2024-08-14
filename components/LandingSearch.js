@@ -21,15 +21,15 @@ export default function LandingSearch({ }) {
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
+                <PostCard name="Steven Pinked" position="Professor" institution="Harvard" department="Math" image="url('/lead1.jpg')"/>
+                <PostCard name="Bandy X. Lee" position="Professor" institution="Yale" department="Biology" image="url('/lead2.webp')"/>
+                <PostCard name="Emery Brown" position="Professor" institution="MIT" department="Computer Science" image="url('/lead3.jpg')"/>
+                <PostCard name="Deborah Archern" position="Professor" institution="NYU" department="Medicine" image="url('/lead4.jpg')"/>
+                <PostCard name="Steven Pinked" position="Professor" institution="Harvard" department="Math" image="url('/lead1.jpg')"/>
+                <PostCard name="Bandy X. Lee" position="Professor" institution="Yale" department="Biology" image="url('/lead2.webp')"/>
+                <PostCard name="Emery Brown" position="Professor" institution="MIT" department="Computer Science" image="url('/lead3.jpg')"/>
+                <PostCard name="Deborah Archern" position="Professor" institution="NYU" department="Medicine" image="url('/lead4.jpg')"/>
+                <PostCard name="Steven Pinked" position="Professor" institution="Harvard" department="Math" image="url('/lead1.jpg')"/>
             </div>
             <div className="flex-box gap-6">
                 <a onClick={() => document.getElementById("checkout").showModal()} className="font-medium hover:underline cursor-pointer">9 out of 250+</a>
