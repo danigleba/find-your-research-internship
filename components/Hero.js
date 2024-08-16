@@ -1,7 +1,6 @@
 import AuthModal from "./AuthModal"
 import UsedBy from "./UsedByComponent"
 import FeaturesVideo from "./featuresVideo"
-import TestimonialGrid from "./TestimonialGrid"
 import { FaStar } from "react-icons/fa6"
 
 export default function Hero({ }) {

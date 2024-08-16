@@ -1,7 +1,6 @@
 import { usePathname } from "next/navigation"
 import { Rubik } from "next/font/google"
 import AuthModal from "./AuthModal"
-import NewPostModal from "./NewPostModal"
 import { FaRegCompass } from "react-icons/fa"
 import { CgProfile } from "react-icons/cg"
 
@@ -18,7 +17,6 @@ export default function Header({ user, getUserPosts, getUserProjects }) {
             <a href="/explore" className={`${pathname == "/explore" ? "text-white bg-[#30313D]" : ""} button-appHeader`}><FaRegCompass />Explore</a>
         </div>
         <AuthModal/>
-        <NewPostModal user={user} getUserPosts={getUserPosts} getUserProjects={getUserProjects} />
     </main>
   )
 }

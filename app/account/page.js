@@ -9,7 +9,6 @@ import Toast from "@/components/Toast"
 import { FaXTwitter } from "react-icons/fa6"
 import { FaLinkedin } from "react-icons/fa"
 import { FaGoogleScholar } from "react-icons/fa6"
-import NewPostModal from "@/components/NewPostModal"
 
 export default function Home() {
     const router = useRouter()

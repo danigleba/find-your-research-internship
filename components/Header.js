@@ -3,7 +3,6 @@ import { useState } from "react"
 import Cookies from "js-cookie"
 import { Rubik } from "next/font/google"
 import AuthModal from "./AuthModal"
-import NewPostModal from "./NewPostModal"
 import { IoLogOut } from "react-icons/io5"
 import { CiCirclePlus } from "react-icons/ci"
 
@@ -34,7 +33,6 @@ export default function Header({ user, getUserPosts, getUserProjects }) {
         <button className="button-secondary">Log in</button>
       </div>
       <AuthModal baseAuthOption={authOption}/>
-      <NewPostModal user={user} getUserPosts={getUserPosts} getUserProjects={getUserProjects} />
     </main>
   )
 }
